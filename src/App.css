@@ -1,0 +1,91 @@
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar ul li {
+  list-style-type: none;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+}
+
+.field-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 5px 10px;
+}
+
+.field-form-name {
+  padding: 10px;
+}
+
+.field-form-name label {
+  margin-right: 20px;
+}
+
+.field-form-name input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.field-form-acres {
+  padding: 10px;
+  margin-right: -44px;
+}
+
+.field-form-acres label {
+  margin-right: 20px;
+}
+
+.field-form-acres input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.field-form button {
+  border: none;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 40px;
+  cursor: pointer;
+  width: 15%;
+  outline: none;
+}
+
+.fields-container {
+  display: flex;
+}
+
+.field-box {
+  background-color: red;
+  background-color: lavender;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.no-fields {
+  text-align: center;
+  padding: 50px;
+  border-radius: 29px;
+  background-color: darkorchid;
+  font-size: 15px;
+  font-style: italic;
+  margin: 10px;
+  color: aliceblue;
+}
