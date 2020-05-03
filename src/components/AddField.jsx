@@ -7,7 +7,7 @@ const AddField = () => {
   const firebaseContext = useContext(FirebaseContext);
   const initialFieldValues = {
     fieldName: "",
-    acres: "",
+    acres: 0,
   };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
@@ -21,7 +21,7 @@ const AddField = () => {
     const { name, value } = target;
     setFieldData({
       ...fieldData,
-      [name]: value,
+      [name]: value.toUpperCase(),
     });
   };
 
@@ -79,12 +79,10 @@ const AddField = () => {
           fieldName: "",
           acres: "",
         });
-        console.log("FILED DATA IN ADD", fieldData);
         dispatchToField({
           type: "ADD_FIELD",
           payload: finalFieldData,
         });
-        console.log("After submission", data);
       })
       .catch((error) => console.log("Unable to add field", error));
   };
@@ -106,7 +104,7 @@ const AddField = () => {
           <div className="field-form-acres">
             <label>Acres:</label>
             <input
-              type="text"
+              type="number"
               name="acres"
               placeholder="Acres"
               value={fieldData.acres}

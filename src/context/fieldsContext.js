@@ -14,7 +14,6 @@ const reducer = (state, action) => {
       return {
         fieldValues: [...state.fieldValues, ...action.payload],
       };
-
     case "ADD_FIELD":
       return {
         fieldValues: [...state.fieldValues, action.payload],
@@ -27,7 +26,7 @@ const reducer = (state, action) => {
 };
 
 export const FieldsContextProvider = (props) => {
-  // Data from custom hook
+  // Fields Data from custom hook
   const { loading, fieldData, error } = useGetFieldDetails("paddyFields");
 
   const [fieldsData, dispatchToField] = useReducer(reducer, initialState);

@@ -89,3 +89,137 @@
   margin: 10px;
   color: aliceblue;
 }
+
+.tractor-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 10px; */
+}
+
+.tractor-form-action {
+  /* padding: 10px; */
+}
+
+.tractor-form-action label {
+  margin: 10px;
+}
+
+.tractor-form-action input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.tractor-form-rounds {
+  /* padding: 10px; */
+  margin-right: -40px;
+}
+
+.tractor-form-rounds label {
+  margin: 10px;
+}
+
+.tractor-form-rounds input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.tractor-form-expense {
+  /* padding: 10px; */
+  margin-right: 40px;
+}
+
+.tractor-form-expense label {
+  margin: 10px;
+}
+
+.tractor-form-expense input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.tractor-form-select {
+  /* padding: 10px; */
+  margin-right: -20px;
+}
+
+.tractor-form-select label {
+  margin: 10px;
+}
+
+.tractor-form-select select {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.tractor-form-date {
+  /* padding: 10px; */
+  margin-right: -54px;
+}
+
+.tractor-form-date label {
+  margin: 10px;
+}
+
+.tractor-form-date input {
+  margin: 8px 0;
+  padding: 8px 2px;
+  padding: 10px;
+  border-radius: 21px;
+  border-width: 0 0 2px 0;
+  background-color: antiquewhite;
+  outline: none;
+}
+
+.tractor-form button {
+  border: none;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 40px;
+  cursor: pointer;
+  width: 95%;
+  outline: none;
+}
+.total-expense {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+  text-align: center;
+}
+
+.tractor-heading {
+  text-align: center;
+  color: darkslategrey;
+  text-transform: uppercase;
+}
+
+.unique-card {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid;
+}
+
+.unique-cards {
+  display: flex;
+}
