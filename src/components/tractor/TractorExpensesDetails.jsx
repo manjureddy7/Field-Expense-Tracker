@@ -80,11 +80,17 @@ const TractorExpensesDetails = () => {
         <div className="fields-container">
           {tractorValues.map((tractorDetails) => (
             <div key={tractorDetails.uid} className="field-box">
-              <div>
-                <button onClick={() => editTractorDetails(tractorDetails)}>
+              <div className="btn-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => editTractorDetails(tractorDetails)}
+                >
                   Edit
                 </button>
-                <button onClick={() => deleteTractorDeatils(tractorDetails)}>
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteTractorDeatils(tractorDetails)}
+                >
                   Delete
                 </button>
               </div>

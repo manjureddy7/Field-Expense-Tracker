@@ -59,9 +59,17 @@ const FieldsDetails = () => {
         <div className="fields-container">
           {fieldValues.map((field) => (
             <div key={field.uid} className="field-box">
-              <div>
-                <button onClick={() => editFieldDetails(field)}>Edit</button>
-                <button onClick={() => deleteFieldDeatils(field)}>
+              <div className="btn-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => editFieldDetails(field)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteFieldDeatils(field)}
+                >
                   Delete
                 </button>
               </div>
