@@ -1,3 +1,23 @@
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .navbar ul {
   display: flex;
   justify-content: space-around;
@@ -69,14 +89,20 @@
 
 .fields-container {
   display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 
 .field-box {
-  background-color: red;
-  background-color: lavender;
   padding: 20px;
   border-radius: 10px;
   margin: 15px;
+  max-width: 200px;
+  max-height: 150px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  border: 1px solid;
+  box-shadow: 5px 5px;
 }
 
 .no-fields {
@@ -219,10 +245,13 @@
   margin: 10px;
   border: 1px solid;
   box-shadow: 5px 5px;
+  background-color: antiquewhite;
 }
 
 .unique-cards {
   display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 
 .landing-header {
@@ -237,13 +266,18 @@
 .landing-header strong span {
   color: darkblue;
 }
+.total-acres {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
   .fields-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
   .unique-cards {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 }

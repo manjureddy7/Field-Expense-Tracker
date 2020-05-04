@@ -20,6 +20,14 @@ const reducer = (state, action) => {
       };
     case "GET_FIELDS":
       return state.fieldValues;
+    case "DELETE_FIELD_DETAILS":
+      const removedField = action.payload;
+      const remainingItems = state.fieldValues.filter(
+        (fieldValue) => fieldValue.uid !== removedField.uid
+      );
+      return {
+        fieldValues: [...remainingItems],
+      };
     default:
       return state;
   }

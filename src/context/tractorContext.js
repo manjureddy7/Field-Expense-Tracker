@@ -20,6 +20,18 @@ const tractorReducer = (state, action) => {
       return {
         tractorValues: [...state.tractorValues, action.payload],
       };
+    // case "EDIT_TRACTOR_DETAILS":
+    //   return {
+    //     tractorValues: [...state.tractorValues, action.payload]
+    //   }
+    case "DELETE_TRACTOR_DETAILS":
+      const removedField = action.payload;
+      const remainingItems = state.tractorValues.filter(
+        (tractorValue) => tractorValue.uid !== removedField.uid
+      );
+      return {
+        tractorValues: [...remainingItems],
+      };
     default:
       return state;
   }

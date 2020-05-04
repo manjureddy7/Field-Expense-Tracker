@@ -67,7 +67,7 @@ const AddField = () => {
     // Type: 5
     const finalFieldData = {
       ...fieldData,
-      uid: new Date().getTime(),
+      uid: new Date().getTime().toString(),
     };
 
     db.collection("paddyFields")

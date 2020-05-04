@@ -10,12 +10,14 @@ const AddTractorExpense = () => {
   const { _, dispatchToTractor } = useContext(TractorContext);
 
   const { fieldValues } = fieldsData;
+  const totalFieldNames = fieldValues.map((fieldValue) => fieldValue.fieldName);
+  const finalFieldNames = ["", ...totalFieldNames];
 
   const initialTractorValues = {
     tractorAction: "",
     rounds: 0,
     oneRoundCost: 0,
-    fieldsName: fieldValues,
+    fieldsName: "",
     date: "",
   };
 
@@ -33,14 +35,33 @@ const AddTractorExpense = () => {
   const handleSubmitTractorData = (e) => {
     e.preventDefault();
 
+    console.log("final tractor data", tractorData);
+
     // Send data to Firestore
 
     // Initialise Firestore
     const db = firebaseContext.firestore();
 
+    // TODO:: To get date in 10-Aug-2010 format
+    // const expenseDate = new Date(initialTractorValues.date);
+    // const expenseDateFomat = new Intl.DateTimeFormat("en", {
+    //   month: "short",
+
+    //   day: "2-digit",
+    //   year: "numeric",
+    // });
+    // const [
+    //   { value: month },
+    //   ,
+    //   { value: day },
+    //   ,
+    //   { value: year },
+    // ] = expenseDateFomat.formatToParts(expenseDate);
+
     const finalTractorData = {
       ...tractorData,
-      uid: new Date().getTime(),
+      uid: new Date().getTime().toString(),
+      // expenseDateFormat: `${day}-${month}-${year}`,
       totalCost: Number(tractorData.rounds) * Number(tractorData.oneRoundCost),
     };
 
@@ -113,10 +134,10 @@ const AddTractorExpense = () => {
           <div className="tractor-form-select">
             <label>Select Field: </label>
             <select name="fieldsName" onChange={handleInputChange}>
-              {fieldValues.length > 0 &&
-                fieldValues.map((field) => (
-                  <option value={field.fieldName} key={field.uid}>
-                    {field.fieldName}
+              {finalFieldNames.length > 0 &&
+                finalFieldNames.map((field) => (
+                  <option value={field} key={field}>
+                    {field}
                   </option>
                 ))}
             </select>
