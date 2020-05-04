@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { FieldsContext } from "../context/fieldsContext";
-import { TractorContext } from "../context/tractorContext";
-import FirebaseContext from "../context/firebaseContext";
-import TractorExpensesDetails from "./TractorExpenses";
+import { FieldsContext } from "../../context/fieldsContext";
+import { TractorContext } from "../../context/tractorContext";
+import FirebaseContext from "../../context/firebaseContext";
+import TractorExpensesDetails from "./TractorExpensesDetails";
 
-const Tractor = () => {
+const AddTractorExpense = () => {
   const firebaseContext = useContext(FirebaseContext);
   const { fieldsData } = useContext(FieldsContext);
   const { _, dispatchToTractor } = useContext(TractorContext);
@@ -32,7 +32,6 @@ const Tractor = () => {
 
   const handleSubmitTractorData = (e) => {
     e.preventDefault();
-    console.log("tractordata field values", tractorData);
 
     // Send data to Firestore
 
@@ -50,7 +49,6 @@ const Tractor = () => {
       .doc(finalTractorData.uid.toString())
       .set(finalTractorData)
       .then((data) => {
-        console.log("after submitting tractor details", data);
         // Once the action is successful, show some data to the user
         // So send this data to TractorContext or reuse existing context
         dispatchToTractor({
@@ -150,4 +148,4 @@ const Tractor = () => {
   );
 };
 
-export default Tractor;
+export default AddTractorExpense;

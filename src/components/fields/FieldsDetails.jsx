@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { FieldsContext } from "../context/fieldsContext";
+import { FieldsContext } from "../../context/fieldsContext";
 
-const Fields = (props) => {
+const FieldsDetails = () => {
   const { fieldsData, dispatchToField, loading, error } = useContext(
     FieldsContext
   );
@@ -36,4 +36,4 @@ const Fields = (props) => {
   );
 };
 
-export default Fields;
+export default FieldsDetails;

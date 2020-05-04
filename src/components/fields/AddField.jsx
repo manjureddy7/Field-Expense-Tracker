@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import FirebaseContext from "../context/firebaseContext";
-import Fields from "./Fields";
-import { FieldsContext } from "../context/fieldsContext";
+import FirebaseContext from "../../context/firebaseContext";
+import FieldsDetails from "./FieldsDetails";
+import { FieldsContext } from "../../context/fieldsContext";
 
 const AddField = () => {
   const firebaseContext = useContext(FirebaseContext);
@@ -115,7 +115,7 @@ const AddField = () => {
         </div>
       </form>
       <hr />
-      <Fields />
+      <FieldsDetails />
     </div>
   );
 };

@@ -218,8 +218,32 @@
   padding: 20px;
   margin: 10px;
   border: 1px solid;
+  box-shadow: 5px 5px;
 }
 
 .unique-cards {
   display: flex;
+}
+
+.landing-header {
+  text-align: center;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.landing-header strong span {
+  color: darkblue;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+  .fields-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .unique-cards {
+    display: flex;
+    flex-direction: column;
+  }
 }

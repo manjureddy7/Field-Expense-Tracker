@@ -1,9 +1,9 @@
-import Navbar from "./Navbar";
-import LandingPage from "./Landing";
-import Tractor from "./Tractor";
-import Pesticides from "./Pesticides";
-import Labour from "./Labour";
-import AddField from "./AddField";
-import NotFound from "./NotFound";
+import Navbar from "./navbar/Navbar";
+import LandingPage from "./landing/Landing";
+import Tractor from "./tractor/Tractor";
+import Pesticides from "./pesticides/Pesticides";
+import Labour from "./labour/Labour";
+import Fields from "./fields/Fields";
+import NotFound from "./notfound/NotFound";
 
-export { Navbar, LandingPage, Tractor, Pesticides, Labour, NotFound, AddField };
+export { Navbar, LandingPage, Tractor, Pesticides, Labour, NotFound, Fields };

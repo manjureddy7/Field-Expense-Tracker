@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { TractorContext } from "../context/tractorContext";
-import SingleFieldExpense from "./SingleFieldExpense";
+import { TractorContext } from "../../context/tractorContext";
+import SingleFieldTractorExpenseCard from "./SingleFieldTractorExpenseCard";
 
 const TractorExpensesDetails = () => {
   const {
@@ -10,7 +10,6 @@ const TractorExpensesDetails = () => {
     tractorContextError,
   } = useContext(TractorContext);
   const { tractorValues } = tractorContextData;
-  console.log("TRACTOR VALUES ARE", tractorValues);
 
   const singleCard = [];
   const arrayReducer = (accumulator, currentValue) =>
@@ -29,22 +28,11 @@ const TractorExpensesDetails = () => {
     });
   });
 
+  // Remove duplicate items
   const stringifiedCards = singleCard.map(JSON.stringify);
-
   const uniqueSetOfCards = new Set(stringifiedCards);
   const uniqueCards = Array.from(uniqueSetOfCards).map(JSON.parse);
-  const renderUniqueCards = () => {
-    return (
-      <div className="unique-cards">
-        {uniqueCards.map((uniqueCard) => (
-          <div key={uniqueCard.totalCost} className="unique-card">
-            <p>Field Name: {uniqueCard.fieldName}</p>
-            <p>Total Cost: {uniqueCard.totalCost}</p>
-          </div>
-        ))}
-      </div>
-    );
-  };
+
   return (
     <div>
       <h2 className="tractor-heading">Tractor expense details</h2>
@@ -77,9 +65,7 @@ const TractorExpensesDetails = () => {
         </div>
       )}
       <hr />
-
-      <hr />
-      {renderUniqueCards()}
+      <SingleFieldTractorExpenseCard uniqueCards={uniqueCards} />
     </div>
   );
 };

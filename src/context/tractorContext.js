@@ -40,7 +40,6 @@ export const TractorContextProvider = (props) => {
 
   useEffect(() => {
     if (tractorHookData.length > 0) {
-      console.log("TRACTOR HOOK DATA", tractorHookData);
       dispatchToTractor({
         type: "ADD_TRACTOR_EXPENSE_DETAILS_FROM_HOOK",
         payload: tractorHookData,

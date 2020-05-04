@@ -7,7 +7,7 @@ import {
   Tractor,
   Pesticides,
   Labour,
-  AddField,
+  Fields,
   NotFound,
 } from "./components";
 import * as ROUTES from "./constants/Routes";
@@ -27,7 +27,7 @@ function App() {
               <hr />
               <Switch>
                 <Route exact path={ROUTES.LANDING} component={LandingPage} />
-                <Route exact path={ROUTES.ADD_FIELD} component={AddField} />
+                <Route exact path={ROUTES.ADD_FIELD} component={Fields} />
                 <Route path={ROUTES.TRACTOR} component={Tractor} />
                 <Route path={ROUTES.PESTICIDES} component={Pesticides} />
                 <Route path={ROUTES.LABOUR} component={Labour} />
