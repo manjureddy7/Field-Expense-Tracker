@@ -15,12 +15,12 @@ const Navbar = () => {
         <li>
           <Link to={ROUTES.TRACTOR}>Tractor</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to={ROUTES.PESTICIDES}>Pesticides</Link>
         </li>
         <li>
           <Link to={ROUTES.LABOUR}>Labour</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
