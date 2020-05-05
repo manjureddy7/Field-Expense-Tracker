@@ -12,7 +12,8 @@ const AddField = () => {
   };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
-  const { dispatchToField, ...rest } = useContext(FieldsContext);
+  const { fieldsData, dispatchToField, ...rest } = useContext(FieldsContext);
+  const { hideEditForm } = fieldsData;
 
   // onChange of Field data
   const handleInputChange = (e) => {
@@ -88,11 +89,13 @@ const AddField = () => {
 
   return (
     <div>
-      <AddFieldForm
-        addField={addField}
-        handleInputChange={handleInputChange}
-        fieldData={fieldData}
-      />
+      {hideEditForm && (
+        <AddFieldForm
+          addField={addField}
+          handleInputChange={handleInputChange}
+          fieldData={fieldData}
+        />
+      )}
       <hr />
       <FieldsDetails />
     </div>

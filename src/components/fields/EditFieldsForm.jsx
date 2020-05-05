@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { FieldsContext } from "../../context/fieldsContext";
 
 const EditFieldForm = (props) => {
   const { handleEdit, toEditFieldDetails, hideEditForm } = props;
-
+  const { fieldsData, dispatchToField, ...rest } = useContext(FieldsContext);
+  const { hideEditForm: hideEditFieldForm } = fieldsData;
   const [fieldData, setFieldData] = useState(toEditFieldDetails);
 
   const handleInputChange = (e) => {
@@ -17,6 +20,9 @@ const EditFieldForm = (props) => {
   // Handle updated data
   const handleEditFieldData = (e) => {
     e.preventDefault();
+    dispatchToField({
+      type: "HIDE_EDIT_FORM",
+    });
     handleEdit(fieldData);
     setFieldData({
       ...fieldData,
@@ -54,7 +60,11 @@ const EditFieldForm = (props) => {
             <button type="submit">Update</button>
             <button
               style={{ backgroundColor: "rosybrown" }}
-              onClick={() => hideEditForm(false)}
+              onClick={() =>
+                dispatchToField({
+                  type: "HIDE_EDIT_FORM",
+                })
+              }
             >
               Cancel
             </button>

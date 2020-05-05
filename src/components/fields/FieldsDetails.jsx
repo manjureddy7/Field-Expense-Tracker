@@ -9,7 +9,7 @@ const FieldsDetails = () => {
   const { fieldsData, dispatchToField, loading, error } = useContext(
     FieldsContext
   );
-  const { fieldValues } = fieldsData;
+  const { fieldValues, hideEditForm: hideEditFieldForm } = fieldsData;
 
   const firebaseContext = useContext(FirebaseContext);
   const db = firebaseContext.firestore();
@@ -33,6 +33,9 @@ const FieldsDetails = () => {
   const editFieldDetails = (field) => {
     setEditFieldValues(field);
     setShowEditFieldForm(true);
+    dispatchToField({
+      type: "SHOW_EDIT_FORM",
+    });
   };
 
   const hideEditForm = (value) => {
@@ -75,7 +78,7 @@ const FieldsDetails = () => {
         </div>
       )}
       <div>
-        {showEditFieldForm && (
+        {!hideEditFieldForm && (
           <EditFieldForm
             hideEditForm={hideEditForm}
             toEditFieldDetails={editFieldValues}
