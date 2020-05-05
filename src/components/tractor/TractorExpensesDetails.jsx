@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TractorContext } from "../../context/tractorContext";
-import SingleFieldTractorExpenseCard from "./SingleFieldTractorExpenseCard";
 import FirebaseContext from "../../context/firebaseContext";
+import EditTractorForm from "./EditForm";
+import TotalExpenseForEachField from "./TotalExpense";
 
-const TractorExpensesDetails = () => {
+const TractorExpensesDetails = (props) => {
   const {
     tractorContextData,
     dispatchToTractor,
@@ -14,9 +15,40 @@ const TractorExpensesDetails = () => {
   const firebaseContext = useContext(FirebaseContext);
   const db = firebaseContext.firestore();
 
-  // Edit Tractor details
-  const editTractorDetails = (id) => {
-    console.log("id is", id);
+  const [showEditPage, setShowEditPage] = useState(false);
+  const [editTractorValues, setEditTractorValues] = useState();
+
+  // Edit Tractor details Collection in firestore
+  const handleEditTractorData = (updatedTractorDeatils) => {
+    const finalUpdatedTractorDetails = {
+      ...updatedTractorDeatils,
+      totalCost:
+        Number(updatedTractorDeatils.rounds) *
+        Number(updatedTractorDeatils.oneRoundCost),
+    };
+    db.collection("tractorData")
+      .doc(finalUpdatedTractorDetails.uid)
+      .set(finalUpdatedTractorDetails)
+      .then((data) => {
+        dispatchToTractor({
+          type: "UPDATE_TRACTOR_DETAILS",
+          payload: finalUpdatedTractorDetails,
+        });
+      })
+      .catch((error) => {
+        console.log("error happened while updating record", error);
+      });
+  };
+
+  // Show edit form details
+  const toggleEditForm = (editTractorDetails) => {
+    setEditTractorValues(editTractorDetails);
+    setShowEditPage(true);
+  };
+
+  // Hide Edit form
+  const hideEditForm = (value) => {
+    setShowEditPage(value);
   };
 
   // function deleteTractorDeatils(details) {
@@ -24,7 +56,6 @@ const TractorExpensesDetails = () => {
   // }
 
   const deleteTractorDeatils = (details) => {
-    console.log("delete is", details);
     db.collection("tractorData")
       .doc(details.uid)
       .delete()
@@ -41,30 +72,19 @@ const TractorExpensesDetails = () => {
 
   const { tractorValues } = tractorContextData;
 
-  const singleCard = [];
-  const arrayReducer = (accumulator, currentValue) =>
-    accumulator + currentValue;
-  const getTotalSum = (fieldName) => {
-    return tractorValues
-      .filter((card) => card.fieldsName === fieldName)
-      .map((totalCostCard) => totalCostCard.totalCost)
-      .reduce(arrayReducer, 0);
-  };
-
-  tractorValues.map((card) => {
-    singleCard.push({
-      fieldName: card.fieldsName,
-      totalCost: getTotalSum(card.fieldsName),
-    });
-  });
-
-  // Remove duplicate items
-  const stringifiedCards = singleCard.map(JSON.stringify);
-  const uniqueSetOfCards = new Set(stringifiedCards);
-  const uniqueCards = Array.from(uniqueSetOfCards).map(JSON.parse);
-
   return (
     <div>
+      {showEditPage && (
+        <div>
+          <EditTractorForm
+            handleSubmitTractorData={handleEditTractorData}
+            finalFieldNames={props.finalFieldNames}
+            editedTractorDetails={editTractorValues}
+            hideEditForm={hideEditForm}
+          />
+        </div>
+      )}
+      <hr />
       <h2 className="tractor-heading">Tractor expense details</h2>
       {tractorContextLoading && (
         <div style={{ textAlign: "center" }}>Loading Data....</div>
@@ -83,7 +103,7 @@ const TractorExpensesDetails = () => {
               <div className="btn-actions">
                 <button
                   className="edit-btn"
-                  onClick={() => editTractorDetails(tractorDetails)}
+                  onClick={() => toggleEditForm(tractorDetails)}
                 >
                   Edit
                 </button>
@@ -109,7 +129,7 @@ const TractorExpensesDetails = () => {
         </div>
       )}
       <hr />
-      <SingleFieldTractorExpenseCard uniqueCards={uniqueCards} />
+      <TotalExpenseForEachField />
     </div>
   );
 };

@@ -20,10 +20,25 @@ const tractorReducer = (state, action) => {
       return {
         tractorValues: [...state.tractorValues, action.payload],
       };
-    // case "EDIT_TRACTOR_DETAILS":
-    //   return {
-    //     tractorValues: [...state.tractorValues, action.payload]
-    //   }
+    case "UPDATE_TRACTOR_DETAILS":
+      const updatedDetails = state.tractorValues.map((tractorDeatils) => {
+        if (tractorDeatils.uid === action.payload.uid) {
+          return {
+            ...tractorDeatils,
+            date: action.payload.date,
+            fieldsName: action.payload.fieldsName,
+            oneRoundCost: action.payload.oneRoundCost,
+            rounds: action.payload.rounds,
+            totalCost: action.payload.totalCost,
+            tractorAction: action.payload.tractorAction,
+          };
+        } else {
+          return tractorDeatils;
+        }
+      });
+      return {
+        tractorValues: [...updatedDetails],
+      };
     case "DELETE_TRACTOR_DETAILS":
       const removedField = action.payload;
       const remainingItems = state.tractorValues.filter(

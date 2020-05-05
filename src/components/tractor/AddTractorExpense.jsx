@@ -3,6 +3,7 @@ import { FieldsContext } from "../../context/fieldsContext";
 import { TractorContext } from "../../context/tractorContext";
 import FirebaseContext from "../../context/firebaseContext";
 import TractorExpensesDetails from "./TractorExpensesDetails";
+import AddTractorForm from "./AddTractorForm";
 
 const AddTractorExpense = () => {
   const firebaseContext = useContext(FirebaseContext);
@@ -34,8 +35,6 @@ const AddTractorExpense = () => {
 
   const handleSubmitTractorData = (e) => {
     e.preventDefault();
-
-    console.log("final tractor data", tractorData);
 
     // Send data to Firestore
 
@@ -99,64 +98,12 @@ const AddTractorExpense = () => {
   return (
     <div>
       <h2 className="tractor-heading">Add details of tractor expense</h2>
-      <form onSubmit={handleSubmitTractorData}>
-        <div className="tractor-form">
-          <div className="tractor-form-action">
-            <label>Action Type: </label>
-            <input
-              type="text"
-              name="tractorAction"
-              value={tractorData.tractorAction}
-              placeholder="Type of tractor action"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-rounds">
-            <label>Rounds: </label>
-            <input
-              type="number"
-              name="rounds"
-              value={tractorData.rounds}
-              placeholder="Rounds of tractor"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-expense">
-            <label>Each Round Expense: </label>
-            <input
-              type="number"
-              name="oneRoundCost"
-              value={tractorData.oneRoundCost}
-              placeholder="Each round expense"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-select">
-            <label>Select Field: </label>
-            <select name="fieldsName" onChange={handleInputChange}>
-              {finalFieldNames.length > 0 &&
-                finalFieldNames.map((field) => (
-                  <option value={field} key={field}>
-                    {field}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <div className="tractor-form-date">
-            <label>Date:</label>
-            <input
-              type="date"
-              placeholder="date"
-              name="date"
-              value={tractorData.date}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-button">
-            <button type="submit">Add Tractor expense</button>
-          </div>
-        </div>
-      </form>
+      <AddTractorForm
+        handleInputChange={handleInputChange}
+        handleSubmitTractorData={handleSubmitTractorData}
+        tractorData={tractorData}
+        finalFieldNames={finalFieldNames}
+      />
       <p className="total-expense">
         Total Expense for thid field is -
         <span style={{ color: "red" }}>
@@ -164,7 +111,7 @@ const AddTractorExpense = () => {
           {Number(tractorData.rounds) * Number(tractorData.oneRoundCost)}
         </span>
       </p>
-      <TractorExpensesDetails />
+      <TractorExpensesDetails finalFieldNames={finalFieldNames} />
     </div>
   );
 };

@@ -295,6 +295,25 @@
   border-radius: 20px;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.edit-form-button {
+  display: flex;
+}
+
+.edit-form-button button {
+  border: none;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 40px;
+  cursor: pointer;
+  width: 40%;
+  outline: none;
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
   .fields-container {
     display: flex;

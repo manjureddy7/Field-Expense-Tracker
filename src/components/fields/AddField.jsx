@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import FirebaseContext from "../../context/firebaseContext";
 import FieldsDetails from "./FieldsDetails";
 import { FieldsContext } from "../../context/fieldsContext";
+import AddFieldForm from "./AddFieldForm";
 
 const AddField = () => {
   const firebaseContext = useContext(FirebaseContext);
@@ -11,9 +12,7 @@ const AddField = () => {
   };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
-  const { fieldsData, dispatchToField, loading, error } = useContext(
-    FieldsContext
-  );
+  const { dispatchToField, ...rest } = useContext(FieldsContext);
 
   // onChange of Field data
   const handleInputChange = (e) => {
@@ -89,31 +88,11 @@ const AddField = () => {
 
   return (
     <div>
-      <form onSubmit={addField}>
-        <div className="field-form">
-          <div className="field-form-name">
-            <label>Field Name:</label>
-            <input
-              type="text"
-              name="fieldName"
-              placeholder="Field name"
-              value={fieldData.fieldName}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="field-form-acres">
-            <label>Acres:</label>
-            <input
-              type="number"
-              name="acres"
-              placeholder="Acres"
-              value={fieldData.acres}
-              onChange={handleInputChange}
-            />
-          </div>
-          <button type="submit">Add Field</button>
-        </div>
-      </form>
+      <AddFieldForm
+        addField={addField}
+        handleInputChange={handleInputChange}
+        fieldData={fieldData}
+      />
       <hr />
       <FieldsDetails />
     </div>

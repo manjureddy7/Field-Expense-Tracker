@@ -1,26 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/fieldsContext";
 import FirebaseContext from "../../context/firebaseContext";
+import EditFieldForm from "./EditFieldsForm";
 
 const FieldsDetails = () => {
+  const [showEditFieldForm, setShowEditFieldForm] = useState(false);
+  const [editFieldValues, setEditFieldValues] = useState();
   const { fieldsData, dispatchToField, loading, error } = useContext(
     FieldsContext
   );
   const { fieldValues } = fieldsData;
 
-  console.log("field values", fieldValues);
-
   const firebaseContext = useContext(FirebaseContext);
   const db = firebaseContext.firestore();
 
   // Edit field
+  const handleEdit = (fieldValue) => {
+    console.log("form value is", fieldValue);
+    db.collection("paddyFields")
+      .doc(fieldValue.uid)
+      .set(fieldValue)
+      .then((data) => {
+        dispatchToField({
+          type: "UPDATE_FIELD_DETAILS",
+          payload: fieldValue,
+        });
+      })
+      .catch((error) => {
+        console.log("error happened while updating field record", error);
+      });
+  };
   const editFieldDetails = (field) => {
-    console.log("field");
+    setEditFieldValues(field);
+    setShowEditFieldForm(true);
+  };
+
+  const hideEditForm = (value) => {
+    setShowEditFieldForm(value);
   };
 
   // Delete Field
   const deleteFieldDeatils = (details) => {
-    console.log("delete is", details);
     db.collection("paddyFields")
       .doc(details.uid)
       .delete()
@@ -34,6 +54,8 @@ const FieldsDetails = () => {
         console.log("error happened while deleting record", error);
       });
   };
+
+  // Edit and update Field
 
   // Total Acres
   const arrayReducer = (accumulator, currentValue) =>
@@ -52,6 +74,15 @@ const FieldsDetails = () => {
           </p>
         </div>
       )}
+      <div>
+        {showEditFieldForm && (
+          <EditFieldForm
+            hideEditForm={hideEditForm}
+            toEditFieldDetails={editFieldValues}
+            handleEdit={handleEdit}
+          />
+        )}
+      </div>
       <div className="total-acres">
         <p>Total Acres: {totalAcres}</p>
       </div>

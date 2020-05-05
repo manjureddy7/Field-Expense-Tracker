@@ -20,6 +20,21 @@ const reducer = (state, action) => {
       };
     case "GET_FIELDS":
       return state.fieldValues;
+    case "UPDATE_FIELD_DETAILS":
+      const updatedDetails = state.fieldValues.map((fieldDetails) => {
+        if (fieldDetails.uid === action.payload.uid) {
+          return {
+            ...fieldDetails,
+            fieldName: action.payload.fieldName,
+            acres: action.payload.acres,
+          };
+        } else {
+          return fieldDetails;
+        }
+      });
+      return {
+        fieldValues: [...updatedDetails],
+      };
     case "DELETE_FIELD_DETAILS":
       const removedField = action.payload;
       const remainingItems = state.fieldValues.filter(
