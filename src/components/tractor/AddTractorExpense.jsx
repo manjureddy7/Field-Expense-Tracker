@@ -8,8 +8,10 @@ import AddTractorForm from "./AddTractorForm";
 const AddTractorExpense = () => {
   const firebaseContext = useContext(FirebaseContext);
   const { fieldsData } = useContext(FieldsContext);
-  const { _, dispatchToTractor } = useContext(TractorContext);
-
+  const { tractorContextData, dispatchToTractor, ...rest } = useContext(
+    TractorContext
+  );
+  const { hideEditForm } = tractorContextData;
   const { fieldValues } = fieldsData;
   const totalFieldNames = fieldValues.map((fieldValue) => fieldValue.fieldName);
   const finalFieldNames = ["", ...totalFieldNames];
@@ -97,20 +99,24 @@ const AddTractorExpense = () => {
 
   return (
     <div>
-      <h2 className="tractor-heading">Add details of tractor expense</h2>
-      <AddTractorForm
-        handleInputChange={handleInputChange}
-        handleSubmitTractorData={handleSubmitTractorData}
-        tractorData={tractorData}
-        finalFieldNames={finalFieldNames}
-      />
-      <p className="total-expense">
-        Total Expense for thid field is -
-        <span style={{ color: "red" }}>
-          {" "}
-          {Number(tractorData.rounds) * Number(tractorData.oneRoundCost)}
-        </span>
-      </p>
+      {hideEditForm && (
+        <div>
+          <h2 className="tractor-heading">Add details of tractor expense</h2>
+          <AddTractorForm
+            handleInputChange={handleInputChange}
+            handleSubmitTractorData={handleSubmitTractorData}
+            tractorData={tractorData}
+            finalFieldNames={finalFieldNames}
+          />
+          <p className="total-expense">
+            Total Expense for thid field is -
+            <span style={{ color: "red" }}>
+              {" "}
+              {Number(tractorData.rounds) * Number(tractorData.oneRoundCost)}
+            </span>
+          </p>
+        </div>
+      )}
       <TractorExpensesDetails finalFieldNames={finalFieldNames} />
     </div>
   );

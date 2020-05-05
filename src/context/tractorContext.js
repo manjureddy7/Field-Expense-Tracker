@@ -6,6 +6,7 @@ export const TractorContext = createContext();
 
 const initialState = {
   tractorValues: [],
+  hideEditForm: true,
 };
 
 const tractorReducer = (state, action) => {
@@ -15,6 +16,7 @@ const tractorReducer = (state, action) => {
     case "ADD_TRACTOR_EXPENSE_DETAILS_FROM_HOOK":
       return {
         tractorValues: [...state.tractorValues, ...action.payload],
+        hideEditForm: true,
       };
     case "ADD_TRACTOR_DETAILS":
       return {
@@ -38,6 +40,7 @@ const tractorReducer = (state, action) => {
       });
       return {
         tractorValues: [...updatedDetails],
+        hideEditForm: true,
       };
     case "DELETE_TRACTOR_DETAILS":
       const removedField = action.payload;
@@ -46,6 +49,17 @@ const tractorReducer = (state, action) => {
       );
       return {
         tractorValues: [...remainingItems],
+        hideEditForm: true,
+      };
+    case "SHOW_EDIT_FORM":
+      return {
+        tractorValues: state.tractorValues,
+        hideEditForm: false,
+      };
+    case "HIDE_EDIT_FORM":
+      return {
+        tractorValues: state.tractorValues,
+        hideEditForm: true,
       };
     default:
       return state;

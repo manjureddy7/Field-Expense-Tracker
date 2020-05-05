@@ -11,11 +11,11 @@ const TractorExpensesDetails = (props) => {
     tractorContextLoading,
     tractorContextError,
   } = useContext(TractorContext);
+  const { hideEditForm } = tractorContextData;
 
   const firebaseContext = useContext(FirebaseContext);
   const db = firebaseContext.firestore();
 
-  const [showEditPage, setShowEditPage] = useState(false);
   const [editTractorValues, setEditTractorValues] = useState();
 
   // Edit Tractor details Collection in firestore
@@ -43,12 +43,9 @@ const TractorExpensesDetails = (props) => {
   // Show edit form details
   const toggleEditForm = (editTractorDetails) => {
     setEditTractorValues(editTractorDetails);
-    setShowEditPage(true);
-  };
-
-  // Hide Edit form
-  const hideEditForm = (value) => {
-    setShowEditPage(value);
+    dispatchToTractor({
+      type: "SHOW_EDIT_FORM",
+    });
   };
 
   // function deleteTractorDeatils(details) {
@@ -74,13 +71,12 @@ const TractorExpensesDetails = (props) => {
 
   return (
     <div>
-      {showEditPage && (
+      {!hideEditForm && (
         <div>
           <EditTractorForm
             handleSubmitTractorData={handleEditTractorData}
             finalFieldNames={props.finalFieldNames}
             editedTractorDetails={editTractorValues}
-            hideEditForm={hideEditForm}
           />
         </div>
       )}

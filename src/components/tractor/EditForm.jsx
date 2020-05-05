@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TractorContext } from "../../context/tractorContext";
 
 const EditTractorForm = (props) => {
   const {
     handleSubmitTractorData,
     finalFieldNames,
     editedTractorDetails,
-    hideEditForm,
   } = props;
 
   const [tractorData, setTractorData] = useState(editedTractorDetails);
+  const { dispatchToTractor, ...rest } = useContext(TractorContext);
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -30,7 +31,9 @@ const EditTractorForm = (props) => {
       oneRoundCost: 0,
       date: "",
     });
-    hideEditForm(false);
+    dispatchToTractor({
+      type: "HIDE_EDIT_FORM",
+    });
   };
   return (
     <div>
@@ -92,7 +95,11 @@ const EditTractorForm = (props) => {
             <button type="submit">Update</button>
             <button
               style={{ backgroundColor: "rosybrown" }}
-              onClick={() => hideEditForm(false)}
+              onClick={() => {
+                dispatchToTractor({
+                  type: "HIDE_EDIT_FORM",
+                });
+              }}
             >
               Cancel
             </button>
