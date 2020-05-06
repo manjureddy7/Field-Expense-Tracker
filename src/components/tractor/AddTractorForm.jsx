@@ -1,15 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddTractorForm = (props) => {
-  const {
-    handleInputChange,
-    handleSubmitTractorData,
-    tractorData,
-    finalFieldNames,
-  } = props;
+  const { handleSubmitTractorData, finalFieldNames } = props;
+
+  const initialTractorValues = {
+    tractorAction: "",
+    rounds: 0,
+    oneRoundCost: 0,
+    fieldsName: "",
+    date: "",
+  };
+
+  const [tractorData, setTractorData] = useState(initialTractorValues);
+
+  const handleInputChange = (e) => {
+    const { target } = e;
+    const { name, value } = target;
+    setTractorData({
+      ...tractorData,
+      [name]: value.toUpperCase(),
+    });
+  };
+  const handleSubmitTractorDataFom = (e) => {
+    e.preventDefault();
+    const finalTractorData = {
+      ...tractorData,
+      uid: new Date().getTime().toString(),
+      // expenseDateFormat: `${day}-${month}-${year}`,
+      totalCost: Number(tractorData.rounds) * Number(tractorData.oneRoundCost),
+    };
+    handleSubmitTractorData(finalTractorData);
+    setTractorData({
+      ...tractorData,
+      tractorAction: "",
+      rounds: 0,
+      oneRoundCost: 0,
+      date: "",
+    });
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmitTractorData}>
+      <form onSubmit={handleSubmitTractorDataFom}>
         <div className="tractor-form">
           <div className="tractor-form-action">
             <label>Action Type: </label>
@@ -67,6 +99,13 @@ const AddTractorForm = (props) => {
           </div>
         </div>
       </form>
+      <p className="total-expense">
+        Total Expense for thid field is -
+        <span style={{ color: "red" }}>
+          {" "}
+          {Number(tractorData.rounds) * Number(tractorData.oneRoundCost)}
+        </span>
+      </p>
     </div>
   );
 };

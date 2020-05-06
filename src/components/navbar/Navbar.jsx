@@ -17,10 +17,10 @@ const Navbar = () => {
         </li>
         {/* <li>
           <Link to={ROUTES.PESTICIDES}>Pesticides</Link>
-        </li>
+        </li>*/}
         <li>
           <Link to={ROUTES.LABOUR}>Labour</Link>
-        </li> */}
+        </li>
       </ul>
     </div>
   );

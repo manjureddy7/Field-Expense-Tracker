@@ -3,6 +3,7 @@ import FirebaseContext from "../../context/firebaseContext";
 import FieldsDetails from "./FieldsDetails";
 import { FieldsContext } from "../../context/fieldsContext";
 import AddFieldForm from "./AddFieldForm";
+import { PADDY_COLLECTION } from "../../constants/collections";
 
 const AddField = () => {
   const firebaseContext = useContext(FirebaseContext);
@@ -70,7 +71,7 @@ const AddField = () => {
       uid: new Date().getTime().toString(),
     };
 
-    db.collection("paddyFields")
+    db.collection(PADDY_COLLECTION)
       .doc(finalFieldData.uid.toString())
       .set(finalFieldData)
       .then((data) => {

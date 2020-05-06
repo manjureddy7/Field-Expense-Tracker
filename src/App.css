@@ -97,7 +97,7 @@
   padding: 20px;
   border-radius: 10px;
   margin: 15px;
-  max-width: 200px;
+  width: 200px;
   max-height: 150px;
   overflow-y: scroll;
   border-radius: 10px;
@@ -246,6 +246,7 @@
   border: 1px solid;
   box-shadow: 5px 5px;
   background-color: antiquewhite;
+  width: 200px;
 }
 
 .unique-cards {
@@ -314,7 +315,73 @@
   outline: none;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+/* Extra small devices (phones, 600px and down)  */
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 250px) and (max-device-width: 480px) {
+  .field-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 10px;
+    padding: 0px;
+  }
+  .field-form-name {
+    padding: 0px;
+  }
+  .field-form button {
+    border: none;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 30%;
+    outline: none;
+  }
+  .tractor-form-expense {
+    padding: 0px;
+    margin-right: 0px;
+  }
+
+  .tractor-form-action input {
+    margin: 8px 0;
+    padding: 8px 2px;
+    padding: 10px;
+    border-radius: 21px;
+    border-width: 0 0 2px 0;
+    background-color: antiquewhite;
+    outline: none;
+    width: 70px;
+  }
+  .tractor-form-rounds input {
+    margin: 8px 0;
+    padding: 8px 2px;
+    padding: 10px;
+    border-radius: 21px;
+    border-width: 0 0 2px 0;
+    background-color: antiquewhite;
+    outline: none;
+    width: 70px;
+  }
+  .tractor-form-expense input {
+    margin: 8px 0;
+    padding: 8px 2px;
+    padding: 10px;
+    border-radius: 21px;
+    border-width: 0 0 2px 0;
+    background-color: antiquewhite;
+    outline: none;
+    width: 70px;
+  }
+  .tractor-form-expense label {
+    margin: 0px;
+  }
+  .tractor-form-select label {
+    margin: 0px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .fields-container {
     display: flex;
     flex-direction: row;

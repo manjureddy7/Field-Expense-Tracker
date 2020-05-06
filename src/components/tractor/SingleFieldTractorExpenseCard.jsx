@@ -5,7 +5,7 @@ const SingleFieldExpenseCard = (props) => {
   return (
     <div className="unique-cards">
       {uniqueCards.map((uniqueCard) => (
-        <div key={uniqueCard.totalCost} className="unique-card">
+        <div key={uniqueCard.fieldName} className="unique-card">
           <p>Field Name: {uniqueCard.fieldName}</p>
           <p>Total Cost: {uniqueCard.totalCost}</p>
         </div>

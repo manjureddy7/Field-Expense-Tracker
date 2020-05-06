@@ -3,6 +3,7 @@ import { TractorContext } from "../../context/tractorContext";
 import FirebaseContext from "../../context/firebaseContext";
 import EditTractorForm from "./EditForm";
 import TotalExpenseForEachField from "./TotalExpense";
+import { TRACTOR_COLLECTION } from "../../constants/collections";
 
 const TractorExpensesDetails = (props) => {
   const {
@@ -26,7 +27,7 @@ const TractorExpensesDetails = (props) => {
         Number(updatedTractorDeatils.rounds) *
         Number(updatedTractorDeatils.oneRoundCost),
     };
-    db.collection("tractorData")
+    db.collection(TRACTOR_COLLECTION)
       .doc(finalUpdatedTractorDetails.uid)
       .set(finalUpdatedTractorDetails)
       .then((data) => {
@@ -53,7 +54,7 @@ const TractorExpensesDetails = (props) => {
   // }
 
   const deleteTractorDeatils = (details) => {
-    db.collection("tractorData")
+    db.collection(TRACTOR_COLLECTION)
       .doc(details.uid)
       .delete()
       .then((data) => {

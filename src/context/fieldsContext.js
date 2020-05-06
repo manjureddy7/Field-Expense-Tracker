@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
 import useGetFieldDetails from "../customHooks/useGetFieldDetails";
+import { PADDY_COLLECTION } from "../constants/collections";
 
 export const FieldsContext = createContext();
 
@@ -65,7 +66,7 @@ const reducer = (state, action) => {
 
 export const FieldsContextProvider = (props) => {
   // Fields Data from custom hook
-  const { loading, fieldData, error } = useGetFieldDetails("paddyFields");
+  const { loading, fieldData, error } = useGetFieldDetails(PADDY_COLLECTION);
 
   const [fieldsData, dispatchToField] = useReducer(reducer, initialState);
 
