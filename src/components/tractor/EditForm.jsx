@@ -110,7 +110,6 @@ const EditTractorForm = (props) => {
           </form>
         </div>
       )}
-      <div>Hello</div>
     </div>
   );
 };
