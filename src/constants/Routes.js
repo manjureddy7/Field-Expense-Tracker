@@ -1,4 +1,5 @@
 export const SIGN_IN = "/signin";
+export const SIGN_UP = "/signup";
 export const LANDING = "/";
 export const TRACTOR = "/tractor";
 export const PESTICIDES = "/pesticides";

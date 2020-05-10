@@ -1,47 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import {
-  LandingPage,
-  Navbar,
-  Tractor,
-  Pesticides,
-  Labour,
-  Fields,
-  NotFound,
-} from "./components";
-import * as ROUTES from "./constants/Routes";
-import FirebaseContext from "./context/firebaseContext";
+import RoutesPage from "./Routes";
 import Firebase from "./firebase/Firebase";
-import { FieldsContextProvider } from "./context/fieldsContext";
-import { TractorContextProvider } from "./context/tractorContext";
-import { LabourContextProvider } from "./context/labourContext";
 
-function App() {
-  return (
-    <Router>
-      <FirebaseContext.Provider value={Firebase}>
-        <FieldsContextProvider>
-          <TractorContextProvider>
-            <LabourContextProvider>
-              <div>
-                <Navbar />
-                <hr />
-                <Switch>
-                  <Route exact path={ROUTES.LANDING} component={LandingPage} />
-                  <Route exact path={ROUTES.ADD_FIELD} component={Fields} />
-                  <Route path={ROUTES.TRACTOR} component={Tractor} />
-                  <Route path={ROUTES.PESTICIDES} component={Pesticides} />
-                  <Route path={ROUTES.LABOUR} component={Labour} />
-                  <Route component={NotFound} />
-                </Switch>
-              </div>
-            </LabourContextProvider>
-          </TractorContextProvider>
-        </FieldsContextProvider>
-      </FirebaseContext.Provider>
-    </Router>
-  );
-}
+const App = () => {
+  const [authUser, setAuthUser] = useState();
+  useEffect(() => {
+    Firebase.auth().onAuthStateChanged((user) => {
+      setAuthUser(user);
+      localStorage.setItem("uid", user.uid);
+      console.log("from app.js", user);
+    });
+  }, []);
+  return <RoutesPage authUser={authUser} />;
+};
 
 export default App;

@@ -1,27 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/Routes";
+import React, { useContext } from "react";
+import UnProtectedNavbar from "./UnProtectedNavbar";
+import ProtectedNavbar from "./ProtectedNavbar";
+
+import AuthUserContext from "../../context/userContext";
 
 const Navbar = () => {
+  const authUser = useContext(AuthUserContext);
+  console.log("FROM NAVBAR AUTH USER IS", authUser);
+
+  const uid = localStorage.getItem("uid");
   return (
     <div className="navbar">
-      <ul>
-        <li>
-          <Link to={ROUTES.LANDING}>Home</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.ADD_FIELD}>Add Field</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.TRACTOR}>Tractor</Link>
-        </li>
-        {/* <li>
-          <Link to={ROUTES.PESTICIDES}>Pesticides</Link>
-        </li>*/}
-        <li>
-          <Link to={ROUTES.LABOUR}>Labour</Link>
-        </li>
-      </ul>
+      {authUser ? <ProtectedNavbar /> : <UnProtectedNavbar />}
     </div>
   );
 };
