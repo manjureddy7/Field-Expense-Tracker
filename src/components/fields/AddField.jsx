@@ -1,19 +1,18 @@
 import React, { useContext, useState } from "react";
-import FirebaseContext from "../../context/FirebaseContext";
 import FieldsDetails from "./FieldsDetails";
 import { FieldsContext } from "../../context/fieldsContext";
 import AddFieldForm from "./AddFieldForm";
 import { PADDY_COLLECTION } from "../../constants/collections";
+import { firestoreDB } from "../../firebase";
 
 const AddField = () => {
-  const firebaseContext = useContext(FirebaseContext);
   const initialFieldValues = {
     fieldName: "",
     acres: 0,
   };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
-  const { fieldsData, dispatchToField, ...rest } = useContext(FieldsContext);
+  const { fieldsData, dispatchToField } = useContext(FieldsContext);
   const { hideEditForm } = fieldsData;
 
   // onChange of Field data
@@ -31,7 +30,6 @@ const AddField = () => {
     e.preventDefault();
 
     // Initialise Firestore
-    const db = firebaseContext.firestore();
 
     // We can add data into firestore by two ways
 
@@ -71,7 +69,7 @@ const AddField = () => {
       uid: new Date().getTime().toString(),
     };
 
-    db.collection(PADDY_COLLECTION)
+    firestoreDB.collection(PADDY_COLLECTION)
       .doc(finalFieldData.uid.toString())
       .set(finalFieldData)
       .then((data) => {

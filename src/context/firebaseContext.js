@@ -16,7 +16,6 @@ export const FirebaseProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = firebaseAUTH.onAuthStateChanged((user) => {
-            console.log("user from context is", currentUser);
             setLoading(false);
             setCurrentUser(user);
         });
@@ -32,6 +31,7 @@ export const FirebaseProvider = ({ children }) => {
     }
 
     const signOut = () => {
+        localStorage.removeItem('uid');
         return firebaseAUTH.signOut();
     }
     

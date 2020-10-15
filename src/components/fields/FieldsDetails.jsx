@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/fieldsContext";
-import FirebaseContext from "../../context/FirebaseContext";
 import EditFieldForm from "./EditFieldsForm";
 import { PADDY_COLLECTION } from "../../constants/collections";
+import { firestoreDB } from "../../firebase";
 
 const FieldsDetails = () => {
   const [showEditFieldForm, setShowEditFieldForm] = useState(false);
@@ -12,12 +12,9 @@ const FieldsDetails = () => {
   );
   const { fieldValues, hideEditForm: hideEditFieldForm } = fieldsData;
 
-  const firebaseContext = useContext(FirebaseContext);
-  const db = firebaseContext.firestore();
-
   // Edit field
   const handleEdit = (fieldValue) => {
-    db.collection(PADDY_COLLECTION)
+    firestoreDB.collection(PADDY_COLLECTION)
       .doc(fieldValue.uid)
       .set(fieldValue)
       .then((data) => {
@@ -44,7 +41,7 @@ const FieldsDetails = () => {
 
   // Delete Field
   const deleteFieldDeatils = (details) => {
-    db.collection(PADDY_COLLECTION)
+    firestoreDB.collection(PADDY_COLLECTION)
       .doc(details.uid)
       .delete()
       .then((data) => {

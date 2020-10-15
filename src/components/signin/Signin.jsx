@@ -39,23 +39,25 @@ const SignIn = (props) => {
 
   return (
     <>
-      <div className="signup-form">
+      <div className="auth-form">
         <form onSubmit={handleSingin}>
           <div>
-            <label>Email:</label>
+            <label id="email">Email:</label>
             <input
               type="email"
               name="email"
+              htmlFor="email"
               placeholder="Please enter your email"
               value={formValues.email}
               onChange={hadleInputChange}
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label id="password">Password:</label>
             <input
               type="password"
               name="password"
+              htmlFor="password"
               placeholder="Please enter your password"
               value={formValues.password}
               onChange={hadleInputChange}
@@ -63,7 +65,6 @@ const SignIn = (props) => {
           </div>
           <div>
             <button
-              className="signup-submit"
               type="submit"
               disabled={isInvalid}
             >

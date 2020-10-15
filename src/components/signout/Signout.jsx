@@ -5,7 +5,7 @@ const SignOut = () => {
   const { signOut } = useFirebase();
   return (
     <div>
-      <button onClick={signOut}>SignOut</button>
+      <button className="signout-btn" onClick={signOut}>SignOut</button>
     </div>
   );
 };

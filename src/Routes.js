@@ -8,6 +8,7 @@ import {
   Labour,
   Fields,
   NotFound,
+  ProtectedRoute
 } from "./components";
 import * as ROUTES from "./constants/Routes";
 import { FieldsContextProvider } from "./context/fieldsContext";
@@ -32,10 +33,10 @@ const RoutesPage = () => {
                   path={ROUTES.LANDING}
                   component={LandingPage}
                 />
-                <Route exact path={ROUTES.ADD_FIELD} component={Fields} />
-                <Route path={ROUTES.TRACTOR} component={Tractor} />
-                <Route path={ROUTES.LABOUR} component={Labour} />
-                <Route path={ROUTES.PESTICIDES} component={Pesticides} />
+                <ProtectedRoute path={ROUTES.ADD_FIELD} component={Fields} />
+                <ProtectedRoute path={ROUTES.TRACTOR} component={Tractor} />
+                <ProtectedRoute path={ROUTES.LABOUR} component={Labour} />
+                <ProtectedRoute path={ROUTES.PESTICIDES} component={Pesticides} />
                 <Route path={ROUTES.SIGN_IN} component={SignIn} />
                 <Route path={ROUTES.SIGN_UP} component={SignUp} />
                 <Route component={NotFound} />

@@ -66,9 +66,9 @@ const SignUp = (props) => {
     formValues.username === "" ||
     formValues.password === "";
   return (
-    <div className="signup-form">
+    <div className="auth-form">
       <form onSubmit={handleSignUp}>
-        <div className="signup-username">
+        <div>
           <label>Username:</label>
           <input
             type="text"
@@ -108,9 +108,11 @@ const SignUp = (props) => {
             onChange={hadleInputChange}
           />
         </div>
-        <button className="signup-submit" type="submit" disabled={isInvalid}>
-          SignUp
-        </button>
+        <div>
+          <button type="submit" disabled={isInvalid}>
+            SignUp
+          </button>
+        </div>
         {formStatus}
       </form>
       {error && <p> Something wrong while signing up...</p>}

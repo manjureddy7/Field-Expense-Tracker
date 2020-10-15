@@ -5,5 +5,6 @@ import Pesticides from "./pesticides/Pesticides";
 import Labour from "./labour/Labour";
 import Fields from "./fields/Fields";
 import NotFound from "./notfound/NotFound";
+import ProtectedRoute from './authRoutes/ProtectedRoute';
 
-export { Navbar, LandingPage, Tractor, Pesticides, Labour, NotFound, Fields };
+export { Navbar, LandingPage, Tractor, Pesticides, Labour, NotFound, Fields, ProtectedRoute };

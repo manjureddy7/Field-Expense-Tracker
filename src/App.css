@@ -18,6 +18,10 @@
   background: #555;
 }
 
+.navbar {
+  padding: 10px;
+}
+
 .navbar ul {
   display: flex;
   justify-content: space-around;
@@ -404,51 +408,54 @@
 
 
 
-/* Authentication CSS 
-Singup CSS  */
 
-.signup-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-}
-
-.signup-form div {
-  display: flex;
-  padding: 15px;
-}
-
-.signup-form input {
-  padding: 8px 2px;
-  padding: 10px;
-  border-radius: 21px;
-  border-width: 0 0 2px 0;
-  background-color: antiquewhite;
-  outline: none;
-  width: 62%;
-  margin-left: 10px;
-  margin-top: -11px;
-}
-
-.signup-submit {
-  margin-left: 50%;
-  margin-top: 10px;
-  padding: 8px 2px;
-  padding: 20px;
-  border-radius: 50%;
-  border-width: 0 0 2px 0;
-  background-color: antiquewhite;
-  outline: none;
-  cursor: pointer;
-}
-
-
-/* Sign in CSS */
+/* Common Form styles in CSS */
 
 .signin-error {
   text-align: center;
   padding: 10px;
   border: 1px solid red;
   background-color: crimson;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 10px 10px #e1a642
+}
+
+.auth-form div {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.auth-form div label {
+  margin-bottom: 10px;
+}
+
+.auth-form div input {
+  padding: 10px;
+  width: 100%;
+}
+
+.auth-form div button {
+  padding: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.signout-btn {
+  cursor: pointer;
+  padding: 10px;
+  width: 130%;
+  outline: none;
+  background: transparent;
+  border: none;
+  background-color: #e8384c;
+  color: white;
+  text-align: center;
 }
