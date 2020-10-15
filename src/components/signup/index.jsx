@@ -44,8 +44,9 @@ const SignUp = (props) => {
             email: formValues.email,
             username: formValues.username,
           };
+          // After user successfully signedup, store user details in other collection
+          console.log("FORM VALUES ARE", formValues);
           if (data) {
-            history.push("/");
             localStorage.setItem("uid", data.uid);
             db.collection(USERS)
               .doc(data.user.uid)
@@ -54,6 +55,7 @@ const SignUp = (props) => {
               .catch((error) =>
                 console.log("error while creating user is", error)
               );
+            history.push("/");
           }
         })
         .catch((error) => console.log("error is", error));
@@ -72,9 +74,9 @@ const SignUp = (props) => {
     formValues.username === "" ||
     formValues.password === "";
   return (
-    <div>
+    <div className="signup-form">
       <form onSubmit={handleSignUp}>
-        <div>
+        <div className="signup-username">
           <label>Username:</label>
           <input
             type="text"
@@ -114,11 +116,9 @@ const SignUp = (props) => {
             onChange={hadleInputChange}
           />
         </div>
-        <div>
-          <button type="submit" disabled={isInvalid}>
-            SignUp
-          </button>
-        </div>
+        <button className="signup-submit" type="submit" disabled={isInvalid}>
+          SignUp
+        </button>
         {formStatus}
       </form>
     </div>
