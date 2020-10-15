@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TractorContext } from "../../context/tractorContext";
-import FirebaseContext from "../../context/firebaseContext";
+import FirebaseContext from "../../context/FirebaseContext";
 import EditTractorForm from "./EditForm";
 import TotalExpenseForEachField from "./TotalExpense";
 import { TRACTOR_COLLECTION } from "../../constants/collections";

@@ -1,22 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import UnProtectedNavbar from "./UnProtectedNavbar";
 import ProtectedNavbar from "./ProtectedNavbar";
+import { useFirebase } from '../../context/FirebaseContext';
 
-import AuthUserContext from "../../context/userContext";
 
-const Navbar = () => {
-  const [uid, setUid] = useState("");
-  const userId = localStorage.getItem("uid");
-  useEffect(() => {
-    setUid(userId);
-  }, [userId]);
-  const authUser = useContext(AuthUserContext);
-  console.log("FROM NAVBAR AUTH USER IS", authUser);
-
-  console.log("uid from navbar is", uid);
+const Navbar = (props) => {
+ const { user } = useFirebase();
+  
+  // Toggle navbar based on auth state
   return (
     <div className="navbar">
-      {uid || authUser ? <ProtectedNavbar /> : <UnProtectedNavbar />}
+      {user ? <ProtectedNavbar /> : <UnProtectedNavbar />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/fieldsContext";
-import FirebaseContext from "../../context/firebaseContext";
+import FirebaseContext from "../../context/FirebaseContext";
 import EditFieldForm from "./EditFieldsForm";
 import { PADDY_COLLECTION } from "../../constants/collections";
 

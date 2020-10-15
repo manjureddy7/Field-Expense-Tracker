@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/fieldsContext";
 import { TractorContext } from "../../context/tractorContext";
-import FirebaseContext from "../../context/firebaseContext";
+import FirebaseContext from "../../context/FirebaseContext";
 import TractorExpensesDetails from "./TractorExpensesDetails";
 import AddTractorForm from "./AddTractorForm";
 import { TRACTOR_COLLECTION } from "../../constants/collections";

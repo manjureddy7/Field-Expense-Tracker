@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { LabourContext } from "../../context/labourContext";
 import AddLabourForm from "./AddLabourForm";
-import FirebaseContext from "../../context/firebaseContext";
+import FirebaseContext from "../../context/FirebaseContext";
 import { LABOUR_COLLECTION } from "../../constants/collections";
 import LabourDetails from "./LabourDetails";
 

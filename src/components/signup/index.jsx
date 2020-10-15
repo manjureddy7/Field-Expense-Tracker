@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
-import FirebaseContext from "../../context/firebaseContext";
+import { useFirebase } from "../../context/FirebaseContext";
 import { checkPassword } from "../../helpers/passwordCheck";
 import { USERS } from "../../constants/collections";
+import { firestoreDB } from '../../firebase';
 
 const initialSingupFormValues = {
   username: "",
@@ -15,7 +16,8 @@ const SignUp = (props) => {
   const { history } = props;
   const [formValues, setFormValues] = useState(initialSingupFormValues);
   const [formStatus, setFormStatus] = useState("");
-  const firebaseContext = useContext(FirebaseContext);
+  const { signUp } = useFirebase();
+  const { error, setError } = useState();
 
   const hadleInputChange = (e) => {
     const { target } = e;
@@ -26,7 +28,7 @@ const SignUp = (props) => {
     });
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     const formStatus = checkPassword(
       formValues.password,
@@ -35,30 +37,20 @@ const SignUp = (props) => {
     if (!formStatus) {
       setFormStatus("Passwords do not match");
     } else {
-      const auth = firebaseContext.auth();
-      const db = firebaseContext.firestore();
-      auth
-        .createUserWithEmailAndPassword(formValues.email, formValues.password)
-        .then((data) => {
-          const finalUserData = {
-            email: formValues.email,
-            username: formValues.username,
-          };
-          // After user successfully signedup, store user details in other collection
-          console.log("FORM VALUES ARE", formValues);
-          if (data) {
-            localStorage.setItem("uid", data.uid);
-            db.collection(USERS)
-              .doc(data.user.uid)
-              .set(finalUserData)
-              .then((userData) => console.log("user data", userData))
-              .catch((error) =>
-                console.log("error while creating user is", error)
-              );
-            history.push("/");
-          }
-        })
-        .catch((error) => console.log("error is", error));
+      try {
+        const finalUserData = {
+          email: formValues.email,
+          username: formValues.username,
+        };
+        const data = await signUp(formValues.email, formValues.password);
+         // After user successfully signedup, store user details in other collection
+         if (data) {
+          await firestoreDB.collection(USERS).doc(data.user.uid).set(finalUserData)
+        }
+        history.push("/");
+      } catch (error) {
+        setError(error)
+      }
       setFormValues({
         ...formValues,
         email: "",
@@ -121,6 +113,7 @@ const SignUp = (props) => {
         </button>
         {formStatus}
       </form>
+      {error && <p> Something wrong while signing up...</p>}
     </div>
   );
 };

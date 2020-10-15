@@ -1,15 +1,11 @@
 import React from "react";
-import firebase from "../../firebase/Firebase";
+import { useFirebase } from "../../context/FirebaseContext";
 
 const SignOut = () => {
-  const handleSubmit = () => {
-    const auth = firebase.auth();
-    auth.signOut();
-    localStorage.removeItem("uid");
-  };
+  const { signOut } = useFirebase();
   return (
     <div>
-      <button onClick={handleSubmit}>SignOut</button>
+      <button onClick={signOut}>SignOut</button>
     </div>
   );
 };

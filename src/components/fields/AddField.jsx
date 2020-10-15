@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import FirebaseContext from "../../context/firebaseContext";
+import FirebaseContext from "../../context/FirebaseContext";
 import FieldsDetails from "./FieldsDetails";
 import { FieldsContext } from "../../context/fieldsContext";
 import AddFieldForm from "./AddFieldForm";

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import FirebaseContext from "../../context/firebaseContext";
+import { useFirebase } from "../../context/FirebaseContext";
 
 const initialSigninFormValues = {
   email: "",
@@ -11,7 +11,7 @@ const SignIn = (props) => {
   const { history } = props;
   const [formValues, setFormValues] = useState(initialSigninFormValues);
   const [formStatus, setFormStatus] = useState("");
-  const firebaseContext = useContext(FirebaseContext);
+  const { login } = useFirebase();
 
   const hadleInputChange = (e) => {
     const { target } = e;
@@ -24,9 +24,7 @@ const SignIn = (props) => {
 
   const handleSingin = (e) => {
     e.preventDefault();
-    const auth = firebaseContext.auth();
-    auth
-      .signInWithEmailAndPassword(formValues.email, formValues.password)
+    login(formValues.email, formValues.password)
       .then((data) => {
         if (!data) return setFormStatus("Something wrong");
         history.push("/");

@@ -1,5 +1,6 @@
 import { useEffect, useContext, useState } from "react";
-import FirebaseContext from "../context/firebaseContext";
+import FirebaseContext from "../context/FirebaseContext";
+import { firestoreDB } from '../firebase';
 
 const useGetFieldDetails = (collectionName) => {
   const firebaseContext = useContext(FirebaseContext);
@@ -8,8 +9,8 @@ const useGetFieldDetails = (collectionName) => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    const db = firebaseContext.firestore();
-    const unsubscribe = db
+    // const db = firebaseContext.firestore();
+    firestoreDB
       .collection(collectionName)
       .get()
       .then((querySnapshot) => {
@@ -24,7 +25,7 @@ const useGetFieldDetails = (collectionName) => {
         setLoading(false);
       });
     // avoid memory leak
-    return () => unsubscribe();
+    // return () => unsubscribe();
   }, [firebaseContext, collectionName]);
   return { loading, fieldData, error };
 };
