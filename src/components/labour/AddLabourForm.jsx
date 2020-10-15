@@ -1,12 +1,7 @@
 import React, { useState, useContext } from "react";
-import { FieldsContext } from "../../context/fieldsContext";
 
 const AddLabourForm = (props) => {
-  const { handleSubmitLabourData } = props;
-  const { fieldsData } = useContext(FieldsContext);
-  const { fieldValues } = fieldsData;
-  const totalFieldNames = fieldValues.map((fieldValue) => fieldValue.fieldName);
-  const finalFieldNames = ["", ...totalFieldNames];
+  const { handleSubmitLabourData, totalFieldNames } = props;
 
   const initialLabourFormValues = {
     workName: "",
@@ -80,9 +75,9 @@ const AddLabourForm = (props) => {
           <div className="tractor-form-select">
             <label>Select Field: </label>
             <select name="fieldsName" onChange={handleInputChange}>
-              {finalFieldNames.length > 0 &&
-                finalFieldNames.map((field) => (
-                  <option value={field} key={field}>
+              {totalFieldNames.length > 0 &&
+                totalFieldNames.map((field, index) => (
+                  <option value={field} key={index}>
                     {field}
                   </option>
                 ))}

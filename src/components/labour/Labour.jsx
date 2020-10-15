@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import { LabourContext } from "../../context/labourContext";
 import AddLabourForm from "./AddLabourForm";
-import FirebaseContext from "../../context/FirebaseContext";
 import { LABOUR_COLLECTION } from "../../constants/collections";
 import LabourDetails from "./LabourDetails";
+import { firestoreDB } from "../../firebase";
+import { FieldsContext } from "../../context/fieldsContext";
 
 const Labour = () => {
   const { labourContextdata, dispatchToLabour } = useContext(LabourContext);
   const { labourValues } = labourContextdata;
-  const firebaseContext = useContext(FirebaseContext);
+  const { fieldsData } = useContext(FieldsContext);
+  const { fieldValues } = fieldsData;
+  const totalFieldNames = ["",... new Set(fieldValues.map((fieldValue) => fieldValue.fieldName))];
 
   const handleSubmitLabourData = (finalLabourExpense) => {
     // Send final data to firestore
-    const db = firebaseContext.firestore();
-    db.collection(LABOUR_COLLECTION)
+    firestoreDB.collection(LABOUR_COLLECTION)
       .doc(finalLabourExpense.uid.toString())
       .set(finalLabourExpense)
       .then(() => {
@@ -30,7 +32,7 @@ const Labour = () => {
   };
   return (
     <div>
-      <AddLabourForm handleSubmitLabourData={handleSubmitLabourData} />
+      <AddLabourForm handleSubmitLabourData={handleSubmitLabourData} totalFieldNames={totalFieldNames}/>
       <hr />
       <LabourDetails labourValues={labourValues} />
     </div>

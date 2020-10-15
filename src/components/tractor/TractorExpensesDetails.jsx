@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TractorContext } from "../../context/tractorContext";
-import FirebaseContext from "../../context/FirebaseContext";
+import { firestoreDB } from "../../firebase";
 import EditTractorForm from "./EditForm";
 import TotalExpenseForEachField from "./TotalExpense";
 import { TRACTOR_COLLECTION } from "../../constants/collections";
@@ -12,10 +12,8 @@ const TractorExpensesDetails = (props) => {
     tractorContextLoading,
     tractorContextError,
   } = useContext(TractorContext);
-  const { hideEditForm } = tractorContextData;
-
-  const firebaseContext = useContext(FirebaseContext);
-  const db = firebaseContext.firestore();
+  const { hideEditForm, tractorValues } = tractorContextData;
+  console.log("TRACTOR VALUES", tractorValues)
 
   const [editTractorValues, setEditTractorValues] = useState();
 
@@ -27,7 +25,7 @@ const TractorExpensesDetails = (props) => {
         Number(updatedTractorDeatils.rounds) *
         Number(updatedTractorDeatils.oneRoundCost),
     };
-    db.collection(TRACTOR_COLLECTION)
+    firestoreDB.collection(TRACTOR_COLLECTION)
       .doc(finalUpdatedTractorDetails.uid)
       .set(finalUpdatedTractorDetails)
       .then((data) => {
@@ -54,7 +52,7 @@ const TractorExpensesDetails = (props) => {
   // }
 
   const deleteTractorDeatils = (details) => {
-    db.collection(TRACTOR_COLLECTION)
+    firestoreDB.collection(TRACTOR_COLLECTION)
       .doc(details.uid)
       .delete()
       .then((data) => {
@@ -67,8 +65,6 @@ const TractorExpensesDetails = (props) => {
         console.log("error happened while deleting record", error);
       });
   };
-
-  const { tractorValues } = tractorContextData;
 
   return (
     <div>
@@ -95,8 +91,8 @@ const TractorExpensesDetails = (props) => {
       )}
       {tractorValues.length > 0 ? (
         <div className="fields-container">
-          {tractorValues.map((tractorDetails) => (
-            <div key={tractorDetails.uid} className="field-box">
+          {tractorValues.map((tractorDetails, index) => (
+            <div key={index} className="field-box">
               <div className="btn-actions">
                 <button
                   className="edit-btn"

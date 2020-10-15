@@ -1,13 +1,12 @@
 import React from "react";
 
-const LabourDetails = (props) => {
-  const { labourValues } = props;
+const LabourDetails = ({labourValues}) => {
   return (
     <div>
       {labourValues.length > 0 ? (
         <div className="fields-container">
-          {labourValues.map((labourDetails) => (
-            <div key={labourDetails.uid} className="field-box">
+          {labourValues.map((labourDetails, index) => (
+            <div key={index} className="field-box">
               <div className="btn-actions">
                 <button className="edit-btn">Edit</button>
                 <button className="delete-btn">Delete</button>

@@ -1,28 +1,25 @@
 import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/fieldsContext";
 import { TractorContext } from "../../context/tractorContext";
-import FirebaseContext from "../../context/FirebaseContext";
+import { firestoreDB } from "../../firebase";
 import TractorExpensesDetails from "./TractorExpensesDetails";
 import AddTractorForm from "./AddTractorForm";
 import { TRACTOR_COLLECTION } from "../../constants/collections";
 
 const AddTractorExpense = () => {
-  const firebaseContext = useContext(FirebaseContext);
-  const { fieldsData } = useContext(FieldsContext);
-  const { tractorContextData, dispatchToTractor, ...rest } = useContext(
-    TractorContext
-  );
+  const { fieldsData: {fieldValues} } = useContext(FieldsContext);
+  const { tractorContextData, dispatchToTractor, } = useContext(TractorContext);
   const { hideEditForm } = tractorContextData;
-  const { fieldValues } = fieldsData;
-  const totalFieldNames = fieldValues.map((fieldValue) => fieldValue.fieldName);
-  const finalFieldNames = ["", ...totalFieldNames];
-  const editFinalFieldNames = ["", ...totalFieldNames];
+  const filedValuesWithName = fieldValues.map((fieldValue) => fieldValue.fieldName);
+  const finalFieldNames = [... new Set(["", ...filedValuesWithName])];
+
+  console.log("FROM CONTEXTTT", useContext(FieldsContext))
+  
 
   const handleSubmitTractorData = (finalTractorData) => {
     // Send data to Firestore
 
     // Initialise Firestore
-    const db = firebaseContext.firestore();
 
     // TODO:: To get date in 10-Aug-2010 format
     // const expenseDate = new Date(initialTractorValues.date);
@@ -41,7 +38,7 @@ const AddTractorExpense = () => {
     // ] = expenseDateFomat.formatToParts(expenseDate);
 
     // Send final data to firestore
-    db.collection(TRACTOR_COLLECTION)
+    firestoreDB.collection(TRACTOR_COLLECTION)
       .doc(finalTractorData.uid.toString())
       .set(finalTractorData)
       .then(() => {
@@ -72,7 +69,7 @@ const AddTractorExpense = () => {
         </div>
       )}
       <div>
-        <TractorExpensesDetails finalFieldNames={editFinalFieldNames} />
+        <TractorExpensesDetails finalFieldNames={finalFieldNames} />
       </div>
     </div>
   );

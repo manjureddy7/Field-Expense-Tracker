@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const AddTractorForm = (props) => {
   const { handleSubmitTractorData, finalFieldNames } = props;
+  console.log("final field names", finalFieldNames)
 
   const initialTractorValues = {
     tractorAction: "",
@@ -77,8 +78,8 @@ const AddTractorForm = (props) => {
             <label>Select Field: </label>
             <select name="fieldsName" onChange={handleInputChange}>
               {finalFieldNames.length > 0 &&
-                finalFieldNames.map((field) => (
-                  <option value={field} key={field}>
+                finalFieldNames.map((field, index) => (
+                  <option value={field} key={index}>
                     {field}
                   </option>
                 ))}

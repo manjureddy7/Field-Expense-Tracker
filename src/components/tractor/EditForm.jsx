@@ -76,8 +76,8 @@ const EditTractorForm = (props) => {
                 <label>Select Field: </label>
                 <select name="fieldsName" onChange={handleInputChange}>
                   {finalFieldNames.length > 0 &&
-                    finalFieldNames.map((field) => (
-                      <option value={field} key={field}>
+                    finalFieldNames.map((field, index) => (
+                      <option value={field} key={index}>
                         {field}
                       </option>
                     ))}
