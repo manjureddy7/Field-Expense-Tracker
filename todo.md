@@ -6,4 +6,8 @@
 
 4. Get field details of only logged in Users (This is DAMN important )
 
-5. FIX some major BUGS in EXPEND details of Tractor & Labour (Values are duplicated)
+5. FIX some major BUGS in EXPEND details of Tractor & Labour (Values are duplicated) -** FIXED ** Context was used as dependency
+
+6. When we type on Form it was calling component multiple times better use REF instead of local state
+
+7. Need to Refactor lot of CODE
