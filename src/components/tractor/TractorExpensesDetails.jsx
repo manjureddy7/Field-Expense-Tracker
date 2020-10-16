@@ -13,7 +13,6 @@ const TractorExpensesDetails = (props) => {
     tractorContextError,
   } = useContext(TractorContext);
   const { hideEditForm, tractorValues } = tractorContextData;
-  console.log("TRACTOR VALUES", tractorValues)
 
   const [editTractorValues, setEditTractorValues] = useState();
 

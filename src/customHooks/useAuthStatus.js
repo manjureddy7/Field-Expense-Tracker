@@ -8,7 +8,6 @@ export const useAuthStatus = () => {
   useEffect(() => {
     const auth = firebaseContext.auth();
     auth.onAuthStateChanged((authUser) => {
-      console.log("AUTH USER", authUser);
       setAuthInfo(authUser);
     });
   }, []);

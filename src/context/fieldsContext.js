@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from "react";
-
-import useGetFieldDetails from "../customHooks/useGetFieldDetails";
 import { PADDY_COLLECTION } from "../constants/collections";
+import getFieldsFromData from '../customHooks/getFieldsFromDB';
+import { useFirebase } from '../context/FirebaseContext';
 
 export const FieldsContext = createContext();
 
@@ -65,8 +65,10 @@ const reducer = (state, action) => {
 };
 
 export const FieldsContextProvider = (props) => {
+
+  const { userUID } = useFirebase();
   // Fields Data from custom hook
-  const { loading, fieldData, error } = useGetFieldDetails(PADDY_COLLECTION);
+  const { loading, fieldData, error } = getFieldsFromData(PADDY_COLLECTION, userUID);
 
   const [fieldsData, dispatchToField] = useReducer(reducer, initialState);
 

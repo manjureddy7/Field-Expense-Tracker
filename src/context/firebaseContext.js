@@ -16,6 +16,8 @@ export const FirebaseProvider = ({ children }) => {
     const [authState, setAuthState] = useState(() => {
         return localStorage.getItem("uid") ? localStorage.getItem("uid") : null
     });
+    // Get LoggedIn user UID whichs helps to get users Field, Labour, Tractor, Pesticdes expenses
+    const [userUID, setUserUID] = useState(localStorage.getItem("uid"));
 
     useEffect(() => {
         const unsubscribe = firebaseAUTH.onAuthStateChanged((user) => {
@@ -43,6 +45,7 @@ export const FirebaseProvider = ({ children }) => {
     const setUIDInLocalStorage = async (uid) => {
         localStorage.setItem("uid", uid);
         setAuthState(uid);
+        setUserUID(uid);
     }
     
     const value = {
@@ -51,7 +54,8 @@ export const FirebaseProvider = ({ children }) => {
         signUp,
         signOut,
         authState,
-        setUIDInLocalStorage
+        setUIDInLocalStorage,
+        userUID
     }
 
     return(

@@ -12,8 +12,6 @@ const AddTractorExpense = () => {
   const { hideEditForm } = tractorContextData;
   const filedValuesWithName = fieldValues.map((fieldValue) => fieldValue.fieldName);
   const finalFieldNames = [... new Set(["", ...filedValuesWithName])];
-
-  console.log("FROM CONTEXTTT", useContext(FieldsContext))
   
 
   const handleSubmitTractorData = (finalTractorData) => {

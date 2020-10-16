@@ -4,6 +4,7 @@ import { FieldsContext } from "../../context/fieldsContext";
 import AddFieldForm from "./AddFieldForm";
 import { PADDY_COLLECTION } from "../../constants/collections";
 import { firestoreDB } from "../../firebase";
+import { useFirebase } from '../../context/FirebaseContext';
 
 const AddField = () => {
   const initialFieldValues = {
@@ -12,8 +13,9 @@ const AddField = () => {
   };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
-  const { fieldsData, dispatchToField } = useContext(FieldsContext);
-  const { hideEditForm } = fieldsData;
+  const { fieldsData: {hideEditForm}, dispatchToField } = useContext(FieldsContext);
+
+  const { userUID } = useFirebase();
 
   // onChange of Field data
   const handleInputChange = (e) => {
@@ -69,9 +71,12 @@ const AddField = () => {
       uid: new Date().getTime().toString(),
     };
 
+    console.log("FROM ADD FIELD COMP", userUID)
+
     firestoreDB.collection(PADDY_COLLECTION)
-      .doc(finalFieldData.uid.toString())
-      .set(finalFieldData)
+      .doc(userUID)
+      .collection("fields")
+      .add(finalFieldData)
       .then((data) => {
         setFieldData({
           ...fieldData,

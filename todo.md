@@ -1,13 +1,23 @@
-1. Code Refactoring **** IN PROGRESS *****
+*** TO DO ***
+1. Better Design
+2. When we type on Form it was calling component multiple times better 
+   use REF instead of local state
 
-2. Add Public and Private Route (rightnow all routes are accessible) **** Done ****
+*** MAJOR IMPLEMENTATION ***
+1.Get field details of only logged in Users (This is DAMN important )
+   a. Implemented for Field data
 
-3. Lazy load Comps
+*** TODO: TACKLE IN END ***
+3. Lazy load Comps 
 
-4. Get field details of only logged in Users (This is DAMN important )
+*** IN PROGRESS ****
+1. Code Refactoring 
 
-5. FIX some major BUGS in EXPEND details of Tractor & Labour (Values are duplicated) -** FIXED ** Context was used as dependency
+*** BUG ***
+1. On Mobile view fix forms & Navbar 
 
-6. When we type on Form it was calling component multiple times better use REF instead of local state
-
-7. Need to Refactor lot of CODE
+*** FIXED ***
+1. Add Public and Private Route (rightnow all routes are accessible)
+2. Auth state persistence on browser refresh
+3. Some major BUGS in EXPEND details of Tractor & Labour (Values are duplicated) 
+   Reason => (Firebase Context was used dependency)

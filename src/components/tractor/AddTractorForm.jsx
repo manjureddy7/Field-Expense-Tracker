@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const AddTractorForm = (props) => {
   const { handleSubmitTractorData, finalFieldNames } = props;
-  console.log("final field names", finalFieldNames)
 
   const initialTractorValues = {
     tractorAction: "",
