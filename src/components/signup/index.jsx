@@ -16,7 +16,7 @@ const SignUp = (props) => {
   const { history } = props;
   const [formValues, setFormValues] = useState(initialSingupFormValues);
   const [formStatus, setFormStatus] = useState("");
-  const { signUp } = useFirebase();
+  const { signUp, setUIDInLocalStorage } = useFirebase();
   const { error, setError } = useState();
 
   const hadleInputChange = (e) => {
@@ -47,6 +47,7 @@ const SignUp = (props) => {
          if (data) {
           await firestoreDB.collection(USERS).doc(data.user.uid).set(finalUserData)
         }
+        setUIDInLocalStorage(data.user.uid);
         history.push("/");
       } catch (error) {
         setError(error)

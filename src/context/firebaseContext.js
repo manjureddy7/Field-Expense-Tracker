@@ -13,6 +13,9 @@ export const useFirebase = () => {
 export const FirebaseProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState();
+    const [authState, setAuthState] = useState(() => {
+        return localStorage.getItem("uid") ? localStorage.getItem("uid") : null
+    });
 
     useEffect(() => {
         const unsubscribe = firebaseAUTH.onAuthStateChanged((user) => {
@@ -30,16 +33,25 @@ export const FirebaseProvider = ({ children }) => {
         return firebaseAUTH.createUserWithEmailAndPassword(email, password)
     }
 
-    const signOut = () => {
-        localStorage.removeItem('uid');
+    const signOut = async () => {
+        localStorage.removeItem("uid");
+        setAuthState(null);
         return firebaseAUTH.signOut();
+    }
+
+    // Save unique ID in Local storage
+    const setUIDInLocalStorage = async (uid) => {
+        localStorage.setItem("uid", uid);
+        setAuthState(uid);
     }
     
     const value = {
         user: currentUser,
         login,
         signUp,
-        signOut
+        signOut,
+        authState,
+        setUIDInLocalStorage
     }
 
     return(

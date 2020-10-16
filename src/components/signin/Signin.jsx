@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import { useFirebase } from "../../context/FirebaseContext";
 
@@ -11,7 +11,7 @@ const SignIn = (props) => {
   const { history } = props;
   const [formValues, setFormValues] = useState(initialSigninFormValues);
   const [formStatus, setFormStatus] = useState("");
-  const { login } = useFirebase();
+  const { login, setUIDInLocalStorage } = useFirebase();
 
   const hadleInputChange = (e) => {
     const { target } = e;
@@ -22,11 +22,13 @@ const SignIn = (props) => {
     });
   };
 
-  const handleSingin = (e) => {
+  const handleSingin = async (e) => {
     e.preventDefault();
     login(formValues.email, formValues.password)
       .then((data) => {
         if (!data) return setFormStatus("Something wrong");
+        const { user: {uid}} = data;
+        setUIDInLocalStorage(uid);
         history.push("/");
       })
       .catch((error) => {

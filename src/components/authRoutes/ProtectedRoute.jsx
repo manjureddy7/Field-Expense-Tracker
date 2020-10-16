@@ -4,11 +4,11 @@ import {  Route } from "react-router-dom";
 import { useFirebase } from '../../context/FirebaseContext';
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
-    const { user } = useFirebase();
+    const { authState } = useFirebase();
     return (
         <Route
           {...rest}
-          render={(props) => user
+          render={(props) => authState
             ? <Component {...props} />
             : <Redirect to={{pathname: '/', state: {from: props.location}}} />
           }
