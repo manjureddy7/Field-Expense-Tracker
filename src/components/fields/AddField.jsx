@@ -4,16 +4,21 @@ import { FieldsContext } from "../../context/fieldsContext";
 import AddFieldForm from "./AddFieldForm";
 import { PADDY_COLLECTION } from "../../constants/collections";
 import { firestoreDB } from "../../firebase";
-import { useFirebase } from '../../context/FirebaseContext';
+import { useFirebase } from "../../context/FirebaseContext";
+
+// Initial State
+const initialFieldValues = {
+  fieldName: "",
+  acres: 0,
+};
 
 const AddField = () => {
-  const initialFieldValues = {
-    fieldName: "",
-    acres: 0,
-  };
   const [fieldData, setFieldData] = useState(initialFieldValues);
 
-  const { fieldsData: {hideEditForm}, dispatchToField } = useContext(FieldsContext);
+  const {
+    fieldsData: { hideEditForm },
+    dispatchToField,
+  } = useContext(FieldsContext);
 
   const { userUID } = useFirebase();
 
@@ -71,9 +76,10 @@ const AddField = () => {
       uid: new Date().getTime().toString(),
     };
 
-    console.log("FROM ADD FIELD COMP", userUID)
+    console.log("FROM ADD FIELD COMP", userUID);
 
-    firestoreDB.collection(PADDY_COLLECTION)
+    firestoreDB
+      .collection(PADDY_COLLECTION)
       .doc(userUID)
       .collection("fields")
       .add(finalFieldData)

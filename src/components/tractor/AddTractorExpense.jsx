@@ -7,12 +7,15 @@ import AddTractorForm from "./AddTractorForm";
 import { TRACTOR_COLLECTION } from "../../constants/collections";
 
 const AddTractorExpense = () => {
-  const { fieldsData: {fieldValues} } = useContext(FieldsContext);
-  const { tractorContextData, dispatchToTractor, } = useContext(TractorContext);
+  const {
+    fieldsData: { fieldValues },
+  } = useContext(FieldsContext);
+  const { tractorContextData, dispatchToTractor } = useContext(TractorContext);
   const { hideEditForm } = tractorContextData;
-  const filedValuesWithName = fieldValues.map((fieldValue) => fieldValue.fieldName);
-  const finalFieldNames = [... new Set(["", ...filedValuesWithName])];
-  
+  const filedValuesWithName = fieldValues.map(
+    (fieldValue) => fieldValue.fieldName
+  );
+  const finalFieldNames = [...new Set(["", ...filedValuesWithName])];
 
   const handleSubmitTractorData = (finalTractorData) => {
     // Send data to Firestore
@@ -36,7 +39,8 @@ const AddTractorExpense = () => {
     // ] = expenseDateFomat.formatToParts(expenseDate);
 
     // Send final data to firestore
-    firestoreDB.collection(TRACTOR_COLLECTION)
+    firestoreDB
+      .collection(TRACTOR_COLLECTION)
       .doc(finalTractorData.uid.toString())
       .set(finalTractorData)
       .then(() => {
@@ -59,7 +63,6 @@ const AddTractorExpense = () => {
     <div>
       {hideEditForm && (
         <div>
-          <h2 className="tractor-heading">Add details of tractor expense</h2>
           <AddTractorForm
             handleSubmitTractorData={handleSubmitTractorData}
             finalFieldNames={finalFieldNames}

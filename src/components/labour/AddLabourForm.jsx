@@ -39,63 +39,61 @@ const AddLabourForm = (props) => {
   };
 
   return (
-    <div>
+    <div className="auth-form">
       <form onSubmit={handleSubmitLabourDataFom}>
-        <div className="tractor-form">
-          <div className="tractor-form-action">
-            <label>Work Name: </label>
-            <input
-              type="text"
-              name="workName"
-              value={labourData.workName}
-              placeholder="Type of labour work"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-rounds">
-            <label>Cost: </label>
-            <input
-              type="number"
-              name="cost"
-              value={labourData.cost}
-              placeholder="Labour Cost"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-expense">
-            <label>Number of People:</label>
-            <input
-              type="number"
-              name="numberOfPeople"
-              value={labourData.numberOfPeople}
-              placeholder="Number of people"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-select">
-            <label>Select Field: </label>
-            <select name="fieldsName" onChange={handleInputChange}>
-              {totalFieldNames.length > 0 &&
-                totalFieldNames.map((field, index) => (
-                  <option value={field} key={index}>
-                    {field}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <div className="tractor-form-date">
-            <label>Date:</label>
-            <input
-              type="date"
-              placeholder="date"
-              name="date"
-              value={labourData.date}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="tractor-form-button">
-            <button type="submit">Add Labour expense</button>
-          </div>
+        <div>
+          <label>Work Name: </label>
+          <input
+            type="text"
+            name="workName"
+            value={labourData.workName}
+            placeholder="Type of labour work"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Cost: </label>
+          <input
+            type="number"
+            name="cost"
+            value={labourData.cost}
+            placeholder="Labour Cost"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Number of People:</label>
+          <input
+            type="number"
+            name="numberOfPeople"
+            value={labourData.numberOfPeople}
+            placeholder="Number of people"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Select Field: </label>
+          <select name="fieldsName" onChange={handleInputChange}>
+            {totalFieldNames.length > 0 &&
+              totalFieldNames.map((field, index) => (
+                <option value={field} key={index}>
+                  {field}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div>
+          <label>Date:</label>
+          <input
+            type="date"
+            placeholder="date"
+            name="date"
+            value={labourData.date}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div style={{ width: "105%", marginTop: "10px" }}>
+          <button type="submit">Add Labour expense</button>
         </div>
       </form>
     </div>

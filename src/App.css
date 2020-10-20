@@ -237,6 +237,8 @@
   padding: 10px;
   box-shadow: 5px 10px;
   text-align: center;
+  position: relative;
+  left: 15px;
 }
 
 .tractor-heading {
@@ -392,6 +394,20 @@
   .tractor-form-select label {
     margin: 0px;
   }
+
+  .navbar {
+    padding: 0;
+  }
+
+  .navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar ul li {
+    margin: 10px;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -443,9 +459,21 @@
 }
 
 .auth-form div button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.auth-form div select {
   padding: 10px;
-  outline: none;
-  width: 100%;
+  width: 110%;
 }
 
 .signout-btn {
