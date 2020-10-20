@@ -76,8 +76,6 @@ const AddField = () => {
       uid: new Date().getTime().toString(),
     };
 
-    console.log("FROM ADD FIELD COMP", userUID);
-
     firestoreDB
       .collection(PADDY_COLLECTION)
       .doc(userUID)

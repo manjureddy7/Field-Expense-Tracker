@@ -5,6 +5,7 @@ import { firestoreDB } from "../../firebase";
 import TractorExpensesDetails from "./TractorExpensesDetails";
 import AddTractorForm from "./AddTractorForm";
 import { TRACTOR_COLLECTION } from "../../constants/collections";
+import { useFirebase } from "../../context/FirebaseContext";
 
 const AddTractorExpense = () => {
   const {
@@ -16,6 +17,8 @@ const AddTractorExpense = () => {
     (fieldValue) => fieldValue.fieldName
   );
   const finalFieldNames = [...new Set(["", ...filedValuesWithName])];
+
+  const { userUID } = useFirebase();
 
   const handleSubmitTractorData = (finalTractorData) => {
     // Send data to Firestore
@@ -41,8 +44,9 @@ const AddTractorExpense = () => {
     // Send final data to firestore
     firestoreDB
       .collection(TRACTOR_COLLECTION)
-      .doc(finalTractorData.uid.toString())
-      .set(finalTractorData)
+      .doc(userUID)
+      .collection("tractors")
+      .add(finalTractorData)
       .then(() => {
         // Once the action is successful, show some data to the user
         // So send this data to TractorContext or reuse existing context
