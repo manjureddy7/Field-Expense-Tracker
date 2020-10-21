@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import useDataFromFirestore from "../customHooks/getDataFromFirestore";
-import { LABOUR_COLLECTION } from "../constants/collections";
+import { LABOUR_COLLECTION, LABOUR_SUB_COLLECTION } from "../constants/collections";
 import { useFirebase } from '../context/FirebaseContext';
 
 export const LabourContext = createContext();
@@ -28,11 +28,7 @@ export const LabourContextProvider = (props) => {
 
   // On the initial load get Data from Firestore using uuid of user
   const { userUID } = useFirebase();
-  const {
-    loading: labourContextLoading,
-    fieldData: labourHookData,
-    error: labourContextError,
-  } = useDataFromFirestore(LABOUR_COLLECTION,userUID, "labour");
+  const { dbdata } = useDataFromFirestore(LABOUR_COLLECTION,userUID, LABOUR_SUB_COLLECTION);
 
   const [labourContextdata, dispatchToLabour] = useReducer(
     reducer,
@@ -40,21 +36,19 @@ export const LabourContextProvider = (props) => {
   );
 
   useEffect(() => {
-    if (labourHookData.length > 0) {
+    if (dbdata.length > 0) {
       dispatchToLabour({
         type: "ADD_LABOUR_EXPENSE_DETAILS_FROM_HOOK",
-        payload: labourHookData,
+        payload: dbdata,
       });
     }
-  }, [labourHookData]);
+  }, [dbdata]);
 
   return (
     <LabourContext.Provider
       value={{
         labourContextdata,
-        dispatchToLabour,
-        labourContextLoading,
-        labourContextError,
+        dispatchToLabour
       }}
     >
       {props.children}
