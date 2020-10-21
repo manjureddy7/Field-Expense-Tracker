@@ -1,68 +1,37 @@
 import React, { useContext, useState } from "react";
-import { FieldsContext } from "../../context/fieldsContext";
+import { FieldsContext } from "../../context/FieldContext";
 import EditFieldForm from "./EditFieldsForm";
-import { PADDY_COLLECTION } from "../../constants/collections";
-import { firestoreDB } from "../../firebase";
+import { getTotalAcres } from './helper';
 
 const FieldsDetails = () => {
-  const [showEditFieldForm, setShowEditFieldForm] = useState(false);
   const [editFieldValues, setEditFieldValues] = useState();
-  const { fieldsData, dispatchToField, loading, error } = useContext(
-    FieldsContext
-  );
+  const { 
+        fieldsData, 
+        dispatchToField, 
+        updateFieldDetailsInDB, 
+        deleteFieldDetails, 
+        loading, 
+        error 
+      } = useContext(FieldsContext);
   const { fieldValues, hideEditForm: hideEditFieldForm } = fieldsData;
 
-  // Edit field
-  const handleEdit = (fieldValue) => {
-    firestoreDB.collection(PADDY_COLLECTION)
-      .doc(fieldValue.uid)
-      .set(fieldValue)
-      .then((data) => {
-        dispatchToField({
-          type: "UPDATE_FIELD_DETAILS",
-          payload: fieldValue,
-        });
-      })
-      .catch((error) => {
-        console.log("error happened while updating field record", error);
-      });
+  // Edit field in firestore
+  const updateField = async (updatedValues) => {
+    await updateFieldDetailsInDB(updatedValues);
   };
+
+  // Update local edit field state
   const editFieldDetails = (field) => {
     setEditFieldValues(field);
-    setShowEditFieldForm(true);
     dispatchToField({
       type: "SHOW_EDIT_FORM",
     });
   };
 
-  const hideEditForm = (value) => {
-    setShowEditFieldForm(value);
+  // Delete Field details in Firestore
+  const deleteFieldDeatils = async (fieldDetails) => {
+    await deleteFieldDetails(fieldDetails)
   };
-
-  // Delete Field
-  const deleteFieldDeatils = (details) => {
-    firestoreDB.collection(PADDY_COLLECTION)
-      .doc(details.uid)
-      .delete()
-      .then((data) => {
-        dispatchToField({
-          type: "DELETE_FIELD_DETAILS",
-          payload: details,
-        });
-      })
-      .catch((error) => {
-        console.log("error happened while deleting record", error);
-      });
-  };
-
-  // Edit and update Field
-
-  // Total Acres
-  const arrayReducer = (accumulator, currentValue) =>
-    accumulator + currentValue;
-  const totalAcres = fieldValues
-    .map((fieldValue) => Number(fieldValue.acres))
-    .reduce(arrayReducer, 0);
 
   return (
     <div>
@@ -70,21 +39,21 @@ const FieldsDetails = () => {
       {error && (
         <div>
           <p style={{ textAlign: "center", color: "red" }}>
-            Something bad happened...!!!
+            {error}
           </p>
         </div>
       )}
       <div>
         {!hideEditFieldForm && (
           <EditFieldForm
-            hideEditForm={hideEditForm}
             toEditFieldDetails={editFieldValues}
-            handleEdit={handleEdit}
+            handleEdit={updateField}
           />
         )}
       </div>
       <div className="total-acres">
-        <p>Total Acres: {totalAcres}</p>
+        <span>Total Acres: {getTotalAcres(fieldValues)}</span>
+        <button className="reload-btn" onClick={() => window.location.reload()}>Reload</button>
       </div>
       {fieldValues.length > 0 ? (
         <div className="fields-container">

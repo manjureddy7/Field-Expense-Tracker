@@ -487,3 +487,19 @@
   color: white;
   text-align: center;
 }
+
+.cover-image {
+  background: url('%PUBLIC_URL%/public/images/green.jpg');
+}
+
+.reload-btn {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 12px;
+  cursor: pointer;
+}

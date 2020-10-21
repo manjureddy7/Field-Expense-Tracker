@@ -14,7 +14,7 @@ export const totalTractorExpesneForEachField = (tractorValues) => {
   const singleCard = [];
 
   tractorValues.map((card) => {
-    singleCard.push({
+    return singleCard.push({
       fieldName: card.fieldsName,
       totalCost: getTotalSum(card.fieldsName, tractorValues, arrayReducer),
     });

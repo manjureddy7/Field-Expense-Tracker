@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import useGetFieldDetails from "../customHooks/useGetFieldDetails";
+import useDataFromFirestore from "../customHooks/getDataFromFirestore";
 import { LABOUR_COLLECTION } from "../constants/collections";
+import { useFirebase } from '../context/FirebaseContext';
 
 export const LabourContext = createContext();
 
@@ -24,13 +25,14 @@ const reducer = (state, action) => {
 };
 
 export const LabourContextProvider = (props) => {
-  // Get Data from hook
-  // Fields Data from custom hook
+
+  // On the initial load get Data from Firestore using uuid of user
+  const { userUID } = useFirebase();
   const {
     loading: labourContextLoading,
     fieldData: labourHookData,
     error: labourContextError,
-  } = useGetFieldDetails(LABOUR_COLLECTION);
+  } = useDataFromFirestore(LABOUR_COLLECTION,userUID, "labour");
 
   const [labourContextdata, dispatchToLabour] = useReducer(
     reducer,

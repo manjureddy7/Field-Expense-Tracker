@@ -4,7 +4,7 @@ import AddLabourForm from "./AddLabourForm";
 import { LABOUR_COLLECTION } from "../../constants/collections";
 import LabourDetails from "./LabourDetails";
 import { firestoreDB } from "../../firebase";
-import { FieldsContext } from "../../context/fieldsContext";
+import { FieldsContext } from "../../context/FieldContext";
 import { useFirebase } from "../../context/FirebaseContext";
 
 const Labour = () => {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import UnProtectedNavbar from "./UnProtectedNavbar";
 import ProtectedNavbar from "./ProtectedNavbar";
 import { useFirebase } from '../../context/FirebaseContext';

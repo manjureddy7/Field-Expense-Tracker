@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 
-import { FieldsContext } from "../../context/fieldsContext";
+import { FieldsContext } from "../../context/FieldContext";
 
 const EditFieldForm = (props) => {
-  const { handleEdit, toEditFieldDetails, hideEditForm } = props;
-  const { fieldsData, dispatchToField, ...rest } = useContext(FieldsContext);
+  // toEditFieldDetails will prepoulate what values should edit
+  const { handleEdit, toEditFieldDetails } = props;
+  const { dispatchToField } = useContext(FieldsContext);
   const [fieldData, setFieldData] = useState(toEditFieldDetails);
 
   const handleInputChange = (e) => {
@@ -28,7 +29,6 @@ const EditFieldForm = (props) => {
       fieldName: "",
       acres: 0,
     });
-    hideEditForm(false);
   };
   return (
     <div>

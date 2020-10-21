@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TractorContext } from '../../context/TractorContext';
 
-const AddTractorForm = (props) => {
-  const { handleSubmitTractorData, finalFieldNames } = props;
+const initialTractorValues = {
+  tractorAction: "",
+  rounds: 0,
+  oneRoundCost: 0,
+  fieldsName: "",
+  date: "",
+};
 
-  const initialTractorValues = {
-    tractorAction: "",
-    rounds: 0,
-    oneRoundCost: 0,
-    fieldsName: "",
-    date: "",
-  };
+const AddTractorForm = ({ finalFieldNames }) => {
 
   const [tractorData, setTractorData] = useState(initialTractorValues);
+  const { addTractorDetailsToDB } = useContext(TractorContext);
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -21,15 +22,16 @@ const AddTractorForm = (props) => {
       [name]: value.toUpperCase(),
     });
   };
-  const handleSubmitTractorDataFom = (e) => {
+
+  // Call context method to add data to Firestore
+  const handleSubmitTractorDataFom = async (e) => {
     e.preventDefault();
     const finalTractorData = {
       ...tractorData,
       uid: new Date().getTime().toString(),
-      // expenseDateFormat: `${day}-${month}-${year}`,
       totalCost: Number(tractorData.rounds) * Number(tractorData.oneRoundCost),
     };
-    handleSubmitTractorData(finalTractorData);
+    await addTractorDetailsToDB(finalTractorData);
     setTractorData({
       ...tractorData,
       tractorAction: "",

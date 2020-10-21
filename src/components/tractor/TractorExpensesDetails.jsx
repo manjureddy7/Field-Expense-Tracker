@@ -1,73 +1,48 @@
 import React, { useContext, useState } from "react";
-import { TractorContext } from "../../context/tractorContext";
-import { firestoreDB } from "../../firebase";
+import { TractorContext } from "../../context/TractorContext";
 import EditTractorForm from "./EditForm";
 import TotalExpenseForEachField from "./TotalExpense";
-import { TRACTOR_COLLECTION } from "../../constants/collections";
 
 const TractorExpensesDetails = (props) => {
   const {
     tractorContextData,
     dispatchToTractor,
-    tractorContextLoading,
-    tractorContextError,
+    deleteTractorDataFromDB,
+    updateTractorDataInDB,
+    loading,
+    error
   } = useContext(TractorContext);
-  const { hideEditForm, tractorValues } = tractorContextData;
 
+  const { showEditForm, tractorValues } = tractorContextData;
   const [editTractorValues, setEditTractorValues] = useState();
 
   // Edit Tractor details Collection in firestore
-  const handleEditTractorData = (updatedTractorDeatils) => {
+  const handleEditTractorData = async (updatedTractorDeatils) => {
     const finalUpdatedTractorDetails = {
       ...updatedTractorDeatils,
       totalCost:
         Number(updatedTractorDeatils.rounds) *
         Number(updatedTractorDeatils.oneRoundCost),
     };
-    firestoreDB.collection(TRACTOR_COLLECTION)
-      .doc(finalUpdatedTractorDetails.uid)
-      .set(finalUpdatedTractorDetails)
-      .then((data) => {
-        dispatchToTractor({
-          type: "UPDATE_TRACTOR_DETAILS",
-          payload: finalUpdatedTractorDetails,
-        });
-      })
-      .catch((error) => {
-        console.log("error happened while updating record", error);
-      });
+    await updateTractorDataInDB(finalUpdatedTractorDetails);
   };
 
   // Show edit form details
-  const toggleEditForm = (editTractorDetails) => {
+  const handleEditForm = (editTractorDetails) => {
     setEditTractorValues(editTractorDetails);
     dispatchToTractor({
       type: "SHOW_EDIT_FORM",
     });
   };
 
-  // function deleteTractorDeatils(details) {
-  //   console.log("id is", details);
-  // }
-
-  const deleteTractorDeatils = (details) => {
-    firestoreDB.collection(TRACTOR_COLLECTION)
-      .doc(details.uid)
-      .delete()
-      .then((data) => {
-        dispatchToTractor({
-          type: "DELETE_TRACTOR_DETAILS",
-          payload: details,
-        });
-      })
-      .catch((error) => {
-        console.log("error happened while deleting record", error);
-      });
+  // Delete Tractor details in DB
+  const deleteTractorDeatils = async(details) => {
+    await deleteTractorDataFromDB(details)
   };
 
   return (
     <div>
-      {!hideEditForm && (
+      {showEditForm && (
         <div>
           <EditTractorForm
             handleSubmitTractorData={handleEditTractorData}
@@ -78,13 +53,13 @@ const TractorExpensesDetails = (props) => {
       )}
       <hr />
       <h2 className="tractor-heading">Tractor expense details</h2>
-      {tractorContextLoading && (
+      {loading && (
         <div style={{ textAlign: "center" }}>Loading Data....</div>
       )}
-      {tractorContextError && (
+      {error && (
         <div>
           <p style={{ textAlign: "center", color: "red" }}>
-            Something bad happened...!!!
+            {error}
           </p>
         </div>
       )}
@@ -95,7 +70,7 @@ const TractorExpensesDetails = (props) => {
               <div className="btn-actions">
                 <button
                   className="edit-btn"
-                  onClick={() => toggleEditForm(tractorDetails)}
+                  onClick={() => handleEditForm(tractorDetails)}
                 >
                   Edit
                 </button>

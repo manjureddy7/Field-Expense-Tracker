@@ -1,10 +1,14 @@
 import React from "react";
 import AddField from "./AddField";
+import FieldsDetails from "./FieldsDetails";
+
 const Fields = () => {
   return (
-    <div>
+    <>
       <AddField />
-    </div>
+      <hr />
+      <FieldsDetails />
+    </>
   );
 };
 

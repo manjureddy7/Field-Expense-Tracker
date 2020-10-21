@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TractorContext } from "../../context/tractorContext";
+import { TractorContext } from "../../context/TractorContext";
 
 const EditTractorForm = (props) => {
   const {
@@ -9,7 +9,7 @@ const EditTractorForm = (props) => {
   } = props;
 
   const [tractorData, setTractorData] = useState(editedTractorDetails);
-  const { dispatchToTractor, ...rest } = useContext(TractorContext);
+  const { dispatchToTractor } = useContext(TractorContext);
 
   const handleInputChange = (e) => {
     const { target } = e;
