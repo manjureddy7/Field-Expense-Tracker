@@ -10,7 +10,7 @@ const ProtectedNavbar = () => {
         <Link to={ROUTES.LANDING}>Home</Link>
       </li>
       <li>
-        <Link to={ROUTES.ADD_FIELD}>Add Field</Link>
+        <Link to={ROUTES.ADD_FIELD}>Field</Link>
       </li>
       <li>
         <Link to={ROUTES.TRACTOR}>Tractor</Link>
