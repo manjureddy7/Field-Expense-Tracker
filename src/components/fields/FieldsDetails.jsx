@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FieldsContext } from "../../context/FieldContext";
 import EditFieldForm from "./EditFieldsForm";
 import { getTotalAcres } from './helper';
+import Loader from "../loader";
 
 const FieldsDetails = () => {
   const [editFieldValues, setEditFieldValues] = useState();
@@ -35,7 +36,7 @@ const FieldsDetails = () => {
 
   return (
     <div>
-      {loading && <div style={{ textAlign: "center" }}>Loading Data....</div>}
+      {loading && <div style={{ textAlign: "center" }}><Loader /></div>}
       {error && (
         <div>
           <p style={{ textAlign: "center", color: "red" }}>
