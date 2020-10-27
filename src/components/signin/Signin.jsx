@@ -72,7 +72,7 @@ const SignIn = (props) => {
               onChange={hadleInputChange}
             />
           </div>
-          <div>
+          <div style={{ width: "100%" }}>
             <button type="submit" disabled={isInvalid}>
               Login
             </button>
