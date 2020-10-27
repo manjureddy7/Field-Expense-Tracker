@@ -15,9 +15,9 @@ const ProtectedNavbar = () => {
       <li>
         <Link to={ROUTES.TRACTOR}>Tractor</Link>
       </li>
-      <li>
+      {/* <li>
         <Link to={ROUTES.LABOUR}>Labour</Link>
-      </li>
+      </li> */}
       <li>
         <SignOut />
       </li>

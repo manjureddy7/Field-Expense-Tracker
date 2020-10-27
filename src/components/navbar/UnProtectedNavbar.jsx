@@ -8,9 +8,9 @@ const UnProtectedNavbar = () => {
       <li>
         <Link to={ROUTES.SIGN_IN}>Signin</Link>
       </li>
-      <li>
+      {/* <li>
         <Link to={ROUTES.SIGN_UP}>Signup</Link>
-      </li>
+      </li> */}
     </ul>
   );
 };
