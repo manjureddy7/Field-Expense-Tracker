@@ -8,7 +8,4 @@
 
 ## Tech Stacks
 - React with Context (No Redux)
-- Firebase (Auth & Firestore)
-
-
-
+- Firebase (Authentication, Hosting & DB (Firestore))
