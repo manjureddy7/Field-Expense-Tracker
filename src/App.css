@@ -422,9 +422,6 @@
   }
 }
 
-
-
-
 /* Common Form styles in CSS */
 
 .signin-error {
@@ -440,7 +437,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  box-shadow: 10px 10px #e1a642
+  box-shadow: 10px 10px #e1a642;
 }
 
 .auth-form div {
@@ -459,7 +456,7 @@
 }
 
 .auth-form div button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -489,7 +486,7 @@
 }
 
 .cover-image {
-  background: url('%PUBLIC_URL%/public/images/green.jpg');
+  background: url("%PUBLIC_URL%/public/images/green.jpg");
 }
 
 .reload-btn {
@@ -513,14 +510,29 @@
   height: 20px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+  text-align: center;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

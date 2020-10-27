@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useFirebase } from "../../context/FirebaseContext";
+import Loader from "../loader";
 
 const initialSigninFormValues = {
   email: "",
@@ -12,6 +13,7 @@ const SignIn = (props) => {
   const [formValues, setFormValues] = useState(initialSigninFormValues);
   const [formStatus, setFormStatus] = useState("");
   const { login, setUIDInLocalStorage } = useFirebase();
+  const [loading, setLoading] = useState(false);
 
   const hadleInputChange = (e) => {
     const { target } = e;
@@ -23,15 +25,20 @@ const SignIn = (props) => {
   };
 
   const handleSingin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     login(formValues.email, formValues.password)
       .then((data) => {
         if (!data) return setFormStatus("Something wrong");
-        const { user: {uid}} = data;
+        const {
+          user: { uid },
+        } = data;
         setUIDInLocalStorage(uid);
+        setLoading(false);
         history.push("/");
       })
       .catch((error) => {
+        setLoading(false);
         setFormStatus(error.message);
         console.log("error is", error);
       });
@@ -66,15 +73,13 @@ const SignIn = (props) => {
             />
           </div>
           <div>
-            <button
-              type="submit"
-              disabled={isInvalid}
-            >
+            <button type="submit" disabled={isInvalid}>
               Login
             </button>
           </div>
         </form>
       </div>
+      {loading && <Loader />}
       {formStatus && <div className="signin-error">{formStatus}</div>}
     </>
   );

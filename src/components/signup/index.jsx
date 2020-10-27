@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useFirebase } from "../../context/FirebaseContext";
 import { checkPassword } from "../../helpers/passwordCheck";
 import { USERS } from "../../constants/collections";
-import { firestoreDB } from '../../firebase';
+import { firestoreDB } from "../../firebase";
+import Loader from "../loader";
 
 const initialSingupFormValues = {
   username: "",
@@ -17,7 +18,8 @@ const SignUp = (props) => {
   const [formValues, setFormValues] = useState(initialSingupFormValues);
   const [formStatus, setFormStatus] = useState("");
   const { signUp, setUIDInLocalStorage } = useFirebase();
-  const { error, setError } = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   const hadleInputChange = (e) => {
     const { target } = e;
@@ -30,6 +32,7 @@ const SignUp = (props) => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formStatus = checkPassword(
       formValues.password,
       formValues.confirmPassword
@@ -43,14 +46,19 @@ const SignUp = (props) => {
           username: formValues.username,
         };
         const data = await signUp(formValues.email, formValues.password);
-         // After user successfully signedup, store user details in other collection
-         if (data) {
-          await firestoreDB.collection(USERS).doc(data.user.uid).set(finalUserData)
+        // After user successfully signedup, store user details in other collection
+        if (data) {
+          await firestoreDB
+            .collection(USERS)
+            .doc(data.user.uid)
+            .set(finalUserData);
         }
         setUIDInLocalStorage(data.user.uid);
+        setLoading(false);
         history.push("/");
       } catch (error) {
-        setError(error)
+        setLoading(false);
+        setError(error);
       }
       setFormValues({
         ...formValues,
@@ -110,12 +118,13 @@ const SignUp = (props) => {
           />
         </div>
         <div>
-          <button type="submit" disabled={isInvalid}>
+          <button type="submit" disabled={loading}>
             SignUp
           </button>
         </div>
         {formStatus}
       </form>
+      {loading && <Loader />}
       {error && <p> Something wrong while signing up...</p>}
     </div>
   );
