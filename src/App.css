@@ -264,11 +264,14 @@
 
 .landing-header {
   text-align: center;
-  height: 80vh;
+  height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url(./images/sunset.jpg);
+  background-size: cover;
+  margin-top: -10px;
 }
 
 .landing-header strong span {
@@ -483,10 +486,6 @@
   background-color: #e8384c;
   color: white;
   text-align: center;
-}
-
-.cover-image {
-  background: url("%PUBLIC_URL%/public/images/green.jpg");
 }
 
 .reload-btn {
