@@ -12,3 +12,7 @@
 ## Tech Stacks
 - React with Context (No Redux)
 - Firebase (Authentication, Hosting & DB (Firestore))
+
+## TODO
+- Convert to TypeScript
+- Add more options in the expense config
