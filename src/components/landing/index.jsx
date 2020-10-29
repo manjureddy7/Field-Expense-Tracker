@@ -4,7 +4,7 @@ const LandingPage = () => {
   return (
     <>
       <div className="landing-header">
-        <h1 style={{ color: "white", fontFamily: "fantasy" }}>
+        <h1>
           Hello welcome to Field Expense Tracker{" "}
           <span role="img" aria-labelledby="cat">
             ✊
@@ -17,12 +17,10 @@ const LandingPage = () => {
           </strong>
         </h3>
 
-        <div style={{ marginTop: "20%", color: "white" }}>
+        <div style={{ marginTop: "20%" }}>
           <strong>
-            Designed and Developed by Manoj Reddy Gangavarapu with{" "}
-            <span role="img" aria-labelledby="cat">
-              😻
-            </span>
+            Designed and Developed by
+            <code style={{ marginLeft: 10 }}>Manoj Reddy Gangavarapu</code>
           </strong>
         </div>
       </div>
