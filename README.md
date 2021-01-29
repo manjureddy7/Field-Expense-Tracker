@@ -1,4 +1,4 @@
-
+## Use test@test.com as email & test@test.com as password to try out this application.
 
 - This App helps Farmer or any Agricultural person to track expense of their each field. :blue_book:
 - Login to App and add Field (Name & Acres).
