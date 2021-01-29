@@ -1,6 +1,4 @@
-### Field Expense Tracker :black_nib: :shipit: 
 
-## I have disabled SIGNUP atm. Please login using : email: expense@test.com, password: expense@test.com
 
 - This App helps Farmer or any Agricultural person to track expense of their each field. :blue_book:
 - Login to App and add Field (Name & Acres).
